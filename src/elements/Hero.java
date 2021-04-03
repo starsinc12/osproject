@@ -67,7 +67,7 @@ public class Hero {
     public Hero() {
         x = GameLogic.WIDTH / 2 ;
         y = GameLogic.HEIGHT - 20;
-        r = 7;
+        r = 8;
         speed = 7;
         health = 3;
         health = 100;

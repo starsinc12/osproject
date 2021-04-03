@@ -1,0 +1,37 @@
+package backgrounds;
+
+import java.awt.image.BufferedImage;
+
+public class PlayTile {
+
+    private BufferedImage image;
+
+    public enum TYPE {
+        GRASS,
+        WALL,
+        SOFTWALL,
+        SPIKES,
+        // декор / укрытие - придумать
+        WALL2, // декоративная клетка. потом придумать что там будет
+        WALL3, // декоративная клетка. потом придумать что там будет
+
+    }
+
+    private TYPE type;
+    public TYPE getType() {
+        return type;
+    }
+
+    private boolean isClosed;
+    public boolean isClosed() {
+        return isClosed;
+    }
+
+    public PlayTile(TYPE type) {
+       this.type = type;
+       if(this.type == TYPE.WALL || this.type == TYPE.WALL2 ) isClosed = true;
+       if(this.type == TYPE.GRASS) isClosed = false;
+    }
+
+
+}

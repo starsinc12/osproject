@@ -25,12 +25,13 @@ public class GameStateManager {
     public static final int TALENTS = 1;
     public static final int WORLD = 2;
     public static final int PLAY = 3;
+    public static final int MENU = 4;
 
     public GameStateManager() {
         paused = false;
         pauseState = new PauseState(this);
         gameStates = new GameState[NUM_STATES];
-        setState(PLAY);
+        setState(WORLD);
     }
 
     private void setState(int i) {

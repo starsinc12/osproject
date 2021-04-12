@@ -177,7 +177,9 @@ public class Hero {
     }
 
     public void draw(Graphics2D g) {
-       /* AffineTransform orig1;
+
+
+        /* AffineTransform orig1;
         orig1 = g.getTransform();
         AffineTransform newtransX1 = (AffineTransform) orig1.clone();
         g.setTransform(newtransX1);

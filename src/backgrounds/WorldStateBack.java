@@ -26,6 +26,6 @@ public class WorldStateBack {
     public void draw(Graphics2D g) {
         backImg = backImg.getScaledInstance(GameLogic.WIDTH,GameLogic.HEIGHT, Image.SCALE_DEFAULT);
         g.drawImage(backImg, 0,0, GameLogic.WIDTH,GameLogic.HEIGHT,null);
-        System.out.println("Tima LOH ob'elsya BLOH sel na lavochku i ZDOHHHH");
+        System.out.println("Tima LOH ob'elsya BLOH sel na lavochku i ZDOH");
     }
 }

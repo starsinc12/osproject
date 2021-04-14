@@ -26,5 +26,7 @@ public class WorldStateBack {
     public void draw(Graphics2D g) {
         backImg = backImg.getScaledInstance(GameLogic.WIDTH,GameLogic.HEIGHT, Image.SCALE_DEFAULT);
         g.drawImage(backImg, 0,0, GameLogic.WIDTH,GameLogic.HEIGHT,null);
+        g.setStroke(new BasicStroke(15));
+        g.drawString("МАКС ЛОХ ЕБАНЫЙ",280,280);
     }
 }

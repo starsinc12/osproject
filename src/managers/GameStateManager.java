@@ -10,6 +10,11 @@ import java.awt.event.MouseEvent;
 public class GameStateManager {
 
     private boolean paused;
+
+    public boolean isPaused() {
+        return paused;
+    }
+
     private PauseState pauseState;
 
     private GameState[] gameStates;
@@ -25,7 +30,7 @@ public class GameStateManager {
     public static final int TALENTS = 1;
     public static final int WORLD = 2;
     public static final int PLAY = 3;
-    public static final int MENU = 4;
+    public static final int PAUSE = 4;
 
     public GameStateManager() {
         paused = false;
@@ -34,10 +39,11 @@ public class GameStateManager {
         setState(WORLD);
     }
 
-    private void setState(int i) {
+    public void setState(int i) {
         previousState = currentState;
         unloadState(previousState);
         currentState = i;
+
         if(i == INVENTORY) {
             gameStates[i] = new InventoryState(this);
             gameStates[i].init();
@@ -78,8 +84,7 @@ public class GameStateManager {
     public void draw(Graphics2D g) {
         if(paused) {
             pauseState.draw(g);
-        }
-        else if(gameStates[currentState] != null) {
+        }  else if(gameStates[currentState] != null) {
             gameStates[currentState].draw(g);
         }
     }

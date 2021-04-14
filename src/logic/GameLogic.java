@@ -26,7 +26,9 @@ public class GameLogic extends JPanel implements Runnable{
 
     private BufferedImage img;
     private Graphics2D graph;
-    private GameStateManager gsm;
+    public static GameStateManager gsm;
+
+
     public static Hero hero;
 
     public GameLogic(int w, int h) {

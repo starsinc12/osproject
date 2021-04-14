@@ -1,6 +1,7 @@
 package GameStates;
 
 import backgrounds.WorldStateBack;
+import logic.GameLogic;
 import managers.GameStateManager;
 
 import javax.imageio.ImageIO;
@@ -48,6 +49,20 @@ public class WorldState extends GameState {
     @Override
     public void update() {
         background.update();
+        if(GameLogic.leftMouse){
+            if(WorldStateBack.isWORLD) {
+                GameLogic.gsm.setState(GameStateManager.WORLD);
+            }
+            if(WorldStateBack.isINVENTORY) {
+                GameLogic.gsm.setState(GameStateManager.INVENTORY);
+            }
+            if(WorldStateBack.isTALENTS) {
+                GameLogic.gsm.setState(GameStateManager.TALENTS);
+            }
+            if(WorldStateBack.isPLAY) {
+                GameLogic.gsm.setState(GameStateManager.PLAY);
+            }
+        }
     }
 
     @Override

@@ -40,7 +40,7 @@ public class PlayState extends GameState {
     public PlayState(GameStateManager gameStateManager) {
         super(gameStateManager);
         roomNumber = 1;
-        currentRoomNumber = 0;
+        currentRoomNumber = 1;
     }
 
     @Override
@@ -48,6 +48,18 @@ public class PlayState extends GameState {
         background = new PlayStateBack();
         arrows = new ArrayList<Arrow>();
         enemies = new ArrayList<Enemy>();
+
+        mapPath = "src\\images\\maps\\location1\\room" + roomNumber.toString() + ".png";
+        enemies.add(new Fly(1));
+        try {
+            map = ImageIO.read(new File(mapPath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        background.setMap(map);
+        tiles = background.getTiles();
+
+
         // Отрисовка и добавление курсора
         Toolkit kit = Toolkit.getDefaultToolkit();
         BufferedImage bufferedImage = new BufferedImage(16,16,BufferedImage.TYPE_INT_ARGB);
@@ -77,7 +89,6 @@ public class PlayState extends GameState {
         background.update();
         currentRoomNumber = roomNumber;
         GameLogic.hero.update(); // roomNumber++
-
         for (int i = 0; i < arrows.size(); i++) {
             arrows.get(i).update();
             if(arrows.get(i).remove()){
@@ -85,7 +96,6 @@ public class PlayState extends GameState {
                 --i;
             }
         }
-
         for (int i = 0; i < enemies.size(); i++) {
             enemies.get(i).update();
             collisionArrowEnemy(i);
@@ -94,8 +104,8 @@ public class PlayState extends GameState {
                 --i;
             }
         }
-
         if(enemies.size() == 0) isOpen = true;
+
     }
 
     // проверка столновений выстрелов и врагов
@@ -112,9 +122,7 @@ public class PlayState extends GameState {
 
     @Override
     public void draw(Graphics2D g) {
-
         background.draw(g);
-
         GameLogic.hero.draw(g);
         for (Arrow arrow : arrows) {
             arrow.draw(g);
@@ -122,9 +130,5 @@ public class PlayState extends GameState {
         for (Enemy enemy : enemies) {
             enemy.draw(g);
         }
-        g.setColor(Color.CYAN);
-        g.setFont(new Font("Consolas",Font.PLAIN, 21));
-        long length = (int) g.getFontMetrics().getStringBounds(roomName,g).getWidth();
-        g.drawString(roomName, 64 - length, 22);
     }
 }

@@ -6,10 +6,12 @@ import inventory.typesOfEquipment.Ring;
 import inventory.typesOfEquipment.Shoes;
 import inventory.typesOfEquipment.Weapon;
 import logic.GameLogic;
+import managers.GameStateManager;
 import skills.Skill;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
 public class Hero {
@@ -179,7 +181,7 @@ public class Hero {
     public void draw(Graphics2D g) {
 
 
-        /* AffineTransform orig1;
+        AffineTransform orig1;
         orig1 = g.getTransform();
         AffineTransform newtransX1 = (AffineTransform) orig1.clone();
         g.setTransform(newtransX1);
@@ -205,7 +207,7 @@ public class Hero {
         g.setTransform(newtransX2);
         g.drawImage(imgPushka,(int) x - 24, (int) y - 42, null);
         g.setTransform(orig2);
-        g.setStroke(new BasicStroke(5));*/
+        g.setStroke(new BasicStroke(5));
 
         g.setColor(Color.white);
         g.fillOval((int) (x - r), (int) (y - r),2 * r, 2 * r);

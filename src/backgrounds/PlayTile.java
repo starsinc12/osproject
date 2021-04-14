@@ -27,6 +27,8 @@ public class PlayTile {
         return isClosed;
     }
 
+
+
     public PlayTile(TYPE type) {
        this.type = type;
        if(this.type == TYPE.WALL || this.type == TYPE.WALL2 ) isClosed = true;

@@ -37,6 +37,8 @@ public class Hero {
 
 
     private static double health;
+    private static double maxHealth;
+
     private static double protection;
     private static double damage;
     public static double getDamage() {
@@ -73,6 +75,7 @@ public class Hero {
         speed = 7;
         health = 3;
         health = 100;
+        maxHealth = health;
         protection = 2;
         damage = 10;
         level = 1;
@@ -113,7 +116,7 @@ public class Hero {
         // ОТВЯЗАТЬ ОТ ФПС
         heroTileX = x / (GameLogic.WIDTH / 20);
         heroTileY =  y / (GameLogic.WIDTH / 20);
-
+        System.out.println(heroTileX + " " + heroTileY);
         if (!(up || down || right || left)) {
             //if(attackTimer < 0) attackTimer = 0;
             isAttack = true;
@@ -180,7 +183,6 @@ public class Hero {
 
     public void draw(Graphics2D g) {
 
-
         AffineTransform orig1;
         orig1 = g.getTransform();
         AffineTransform newtransX1 = (AffineTransform) orig1.clone();
@@ -209,12 +211,12 @@ public class Hero {
         g.setTransform(orig2);
         g.setStroke(new BasicStroke(5));
 
-        g.setColor(Color.white);
+        /*g.setColor(Color.white);
         g.fillOval((int) (x - r), (int) (y - r),2 * r, 2 * r);
         g.setStroke(new BasicStroke(3));
         g.setColor(Color.white.darker());
         g.drawOval((int) (x - r), (int) (y - r),2 * r, 2 * r);
-        g.setStroke(new BasicStroke(1));
+        g.setStroke(new BasicStroke(1));*/
 
     }
 }

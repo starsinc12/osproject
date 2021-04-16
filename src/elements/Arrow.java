@@ -11,9 +11,11 @@ import java.awt.event.MouseEvent;
 
 public class Arrow {
 
-    private double x;
-    private double y;
+    private int x;
+    private int y;
     private int countReflections;
+    private int arrowTileX;
+    private int arrowTileY;
 
     public double getX() {
         return x;
@@ -57,38 +59,55 @@ public class Arrow {
     }
 
     public void update() {
+        arrowTileX = x / (GameLogic.WIDTH / 20);
+        arrowTileY =  y / (GameLogic.WIDTH / 20);
+        if(isReflecting && countReflections != 0) {
+
+        }
         x += arrowDX;
         y += arrowDY;
-        if(isReflecting) {
-            if (x <= 0 && arrowDX < 0) {
-                arrowDX = -arrowDX;
-                --countReflections;
-            }
-            if (x >= GameLogic.WIDTH && arrowDX > 0) {
-                arrowDX = -arrowDX;
-                --countReflections;
-            }
-            if (y <= 0 && arrowDY < 0) {
-                arrowDY = -arrowDY;
-                --countReflections;
-            }
-            if (y >= GameLogic.HEIGHT && arrowDY > 0){
-                arrowDY = -arrowDY;
-                --countReflections;
-            }
-        }
     }
 
     public boolean remove() {
         if(isReflecting && countReflections != 0) {
             return false;
         } else if (isReflecting && countReflections == 0) {
-            countReflections = 2;
             return true;
         } else {
-            if (y < 0 || y > GameLogic.HEIGHT || x < 0 || x > GameLogic.WIDTH) return true;
-            else return false;
+            if (y <= 0 || y >= GameLogic.HEIGHT || x <= 0 || x >= GameLogic.WIDTH) {
+                return true;
+            }
+            if (collisionCheckLeft() || collisionCheckDown() || collisionCheckRight() || collisionCheckUp()) {
+                return true;
+            } else {
+                return false;
+            }
+
         }
+    }
+
+    private boolean collisionCheckRight() {
+        if (x >= ((GameLogic.WIDTH / 20) * (arrowTileX + 1)) && PlayState.background.getTiles()[arrowTileX + 1][arrowTileY].isClosed()) {
+            return true;
+        } else return false;
+    }
+
+    private boolean collisionCheckLeft(){
+        if (x <= ((GameLogic.WIDTH / 20) * arrowTileX) && PlayState.background.getTiles()[arrowTileX - 1][arrowTileY].isClosed()) {
+            return true;
+        } else return false;
+    }
+
+    private boolean collisionCheckDown() {
+        if (y >= ((GameLogic.WIDTH / 20) * (arrowTileY + 1)) && PlayState.background.getTiles()[arrowTileX][arrowTileY + 1].isClosed()) {
+            return true;
+        } else return false;
+    }
+
+    private boolean collisionCheckUp(){
+        if (y <= ((GameLogic.HEIGHT / 20) * arrowTileY) && PlayState.background.getTiles()[arrowTileX][arrowTileY - 1].isClosed()) {
+            return true;
+        } else return false;
     }
 
     public void draw(Graphics2D g) {

@@ -67,7 +67,6 @@ public class WorldState extends GameState {
 
     @Override
     public void draw(Graphics2D g) {
-
         background.draw(g);
     }
 }

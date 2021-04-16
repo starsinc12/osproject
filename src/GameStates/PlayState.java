@@ -86,9 +86,12 @@ public class PlayState extends GameState {
             tiles = background.getTiles();
         }
         roomName = roomNumber.toString() + "/50";
+
         background.update();
         currentRoomNumber = roomNumber;
+
         GameLogic.hero.update(); // roomNumber++
+
         for (int i = 0; i < arrows.size(); i++) {
             arrows.get(i).update();
             if(arrows.get(i).remove()){
@@ -96,6 +99,7 @@ public class PlayState extends GameState {
                 --i;
             }
         }
+
         for (int i = 0; i < enemies.size(); i++) {
             enemies.get(i).update();
             collisionArrowEnemy(i);

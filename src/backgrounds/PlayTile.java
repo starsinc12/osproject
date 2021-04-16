@@ -1,6 +1,7 @@
 package backgrounds;
 
 import java.awt.image.BufferedImage;
+import java.lang.reflect.Type;
 
 public class PlayTile {
 
@@ -26,6 +27,7 @@ public class PlayTile {
     public boolean isClosed() {
         return isClosed;
     }
+
 
 
 

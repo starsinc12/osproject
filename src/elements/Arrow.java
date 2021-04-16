@@ -1,6 +1,7 @@
 package elements;
 
 import GameStates.PlayState;
+import backgrounds.PlayTile;
 import logic.GameLogic;
 import logic.GameStart;
 import managers.GameStateManager;
@@ -44,8 +45,8 @@ public class Arrow {
     public Arrow(boolean isR) {
         x = Hero.getX();
         y = Hero.getY();
-        r = 4;
-        speed = 11;
+        r = 5;
+        speed = 12;
         isReflecting = isR;
         countReflections = 3;
         damage = Hero.getDamage();
@@ -55,7 +56,7 @@ public class Arrow {
         arrowDX = distX / dist * speed;
         arrowDY = distY / dist * speed;
 
-        color = Color.BLUE;
+        color = Color.RED;
     }
 
     public void update() {
@@ -88,24 +89,36 @@ public class Arrow {
 
     private boolean collisionCheckRight() {
         if (x >= ((GameLogic.WIDTH / 20) * (arrowTileX + 1)) && PlayState.background.getTiles()[arrowTileX + 1][arrowTileY].isClosed()) {
+            if(PlayState.background.getTiles()[arrowTileX + 1][arrowTileY].getType() == PlayTile.TYPE.WALL2){
+                PlayState.background.getTiles()[arrowTileX + 1][arrowTileY].wallHit();
+            }
             return true;
         } else return false;
     }
 
     private boolean collisionCheckLeft(){
         if (x <= ((GameLogic.WIDTH / 20) * arrowTileX) && PlayState.background.getTiles()[arrowTileX - 1][arrowTileY].isClosed()) {
+            if(PlayState.background.getTiles()[arrowTileX - 1][arrowTileY].getType() == PlayTile.TYPE.WALL2){
+                PlayState.background.getTiles()[arrowTileX - 1][arrowTileY].wallHit();
+            }
             return true;
         } else return false;
     }
 
     private boolean collisionCheckDown() {
         if (y >= ((GameLogic.WIDTH / 20) * (arrowTileY + 1)) && PlayState.background.getTiles()[arrowTileX][arrowTileY + 1].isClosed()) {
+            if(PlayState.background.getTiles()[arrowTileX][arrowTileY + 1].getType() == PlayTile.TYPE.WALL2){
+                PlayState.background.getTiles()[arrowTileX][arrowTileY + 1].wallHit();
+            }
             return true;
         } else return false;
     }
 
     private boolean collisionCheckUp(){
         if (y <= ((GameLogic.HEIGHT / 20) * arrowTileY) && PlayState.background.getTiles()[arrowTileX][arrowTileY - 1].isClosed()) {
+            if(PlayState.background.getTiles()[arrowTileX][arrowTileY - 1].getType() == PlayTile.TYPE.WALL2){
+                PlayState.background.getTiles()[arrowTileX][arrowTileY - 1].wallHit();
+            }
             return true;
         } else return false;
     }

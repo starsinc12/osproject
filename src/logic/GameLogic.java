@@ -25,7 +25,12 @@ public class GameLogic extends JPanel implements Runnable{
     private final int TARGET_TIME = 1000 / FPS;
 
     private BufferedImage img;
-    private Graphics2D graph;
+    private static Graphics2D graph;
+
+    public static Graphics2D getGraph() {
+        return graph;
+    }
+
     public static GameStateManager gsm;
 
 

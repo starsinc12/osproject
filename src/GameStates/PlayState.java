@@ -56,7 +56,7 @@ public class PlayState extends GameState {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        background.setMap(map);
+        background.setMap(map, GameLogic.getGraph());
         tiles = background.getTiles();
 
 
@@ -82,7 +82,7 @@ public class PlayState extends GameState {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            background.setMap(map);
+            background.setMap(map, GameLogic.getGraph());
             tiles = background.getTiles();
         }
         roomName = roomNumber.toString() + "/50";

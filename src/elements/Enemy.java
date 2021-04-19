@@ -35,6 +35,5 @@ public abstract class Enemy {
     public int getY() {
         return y;
     }
-
     public abstract int getR();
 }

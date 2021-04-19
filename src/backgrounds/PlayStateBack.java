@@ -1,11 +1,8 @@
 package backgrounds;
 
-
-
 import GameStates.PlayState;
 import elements.enemies.Fly;
 import logic.GameLogic;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;

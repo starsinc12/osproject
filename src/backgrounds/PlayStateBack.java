@@ -54,15 +54,7 @@ public class PlayStateBack {
                 }
             }
         }
-        /*for (int i = 0; i < map.getWidth(null); i++) {
-            for (int j = 0; j < map.getHeight(null); j++) {
-                color = new Color(map.getRGB(j, i));
-                if (color.equals(new Color(223,113,38)) && tiles[j][i].getType() == PlayTile.TYPE.WALL2 && tiles[j][i].hit == 0) {
-                    g.drawImage(grass,j * GameLogic.WIDTH / 20,i * GameLogic.HEIGHT / 20,null);
-                    tiles[j][i] = new PlayTile(PlayTile.TYPE.GRASS);
-                }
-            }
-        }*/
+
     }
 
     public void setMap(BufferedImage map, Graphics2D g) {

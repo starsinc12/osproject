@@ -18,6 +18,15 @@ public class Hero {
 
     private static int x;
     private static int y;
+
+    public static void setX(int x) {
+        Hero.x = x;
+    }
+
+    public static void setY(int y) {
+        Hero.y = y;
+    }
+
     public static int getX() {
         return x;
     }

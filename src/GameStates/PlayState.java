@@ -59,12 +59,11 @@ public class PlayState extends GameState {
         background.setMap(map, GameLogic.getGraph());
         tiles = background.getTiles();
 
-
         // Отрисовка и добавление курсора
         Toolkit kit = Toolkit.getDefaultToolkit();
         BufferedImage bufferedImage = new BufferedImage(16,16,BufferedImage.TYPE_INT_ARGB);
         Graphics2D g3 = (Graphics2D) bufferedImage.getGraphics();
-        g3.setColor(new Color(255,255,255));
+        g3.setColor(new Color(0,0,0));
         g3.drawOval(0,0,4,4);
         g3.drawLine(2,0,2,4);
         g3.drawLine(0,2,4,2);

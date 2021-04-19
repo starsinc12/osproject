@@ -1,6 +1,8 @@
 package managers;
 
 import GameStates.*;
+import backgrounds.WorldStateBack;
+import elements.Hero;
 import logic.GameLogic;
 
 import javax.swing.*;
@@ -73,12 +75,29 @@ public class GameStateManager {
     public void update() {
         if(paused) {
             pauseState.update();
+            if(GameLogic.leftMouse){
+                if(PauseState.isResume) {
+                    GameLogic.gsm.setStateResumeGame();
+                    paused = false;
+                }
+                if (PauseState.isQuit) {
+                    Hero.setX(GameLogic.WIDTH / 2);
+                    Hero.setY(GameLogic.HEIGHT - 20);
+                    GameLogic.gsm.setState(GameStateManager.WORLD);
+                    paused = false;
+                }
+            }
         }
         else if(gameStates[currentState] != null) {
             gameStates[currentState].update();
             mouseX = GameLogic.mouseX;
             mouseY = GameLogic.mouseY;
         }
+    }
+
+    private void setStateResumeGame() {
+        previousState = currentState;
+        currentState = GameStateManager.PLAY;
     }
 
     public void draw(Graphics2D g) {

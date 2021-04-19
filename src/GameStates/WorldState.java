@@ -1,6 +1,7 @@
 package GameStates;
 
 import backgrounds.WorldStateBack;
+import elements.Hero;
 import logic.GameLogic;
 import managers.GameStateManager;
 
@@ -60,6 +61,8 @@ public class WorldState extends GameState {
                 GameLogic.gsm.setState(GameStateManager.TALENTS);
             }
             if(WorldStateBack.isPLAY) {
+                Hero.setX(GameLogic.WIDTH / 2);
+                Hero.setY(GameLogic.HEIGHT - 20);
                 GameLogic.gsm.setState(GameStateManager.PLAY);
             }
         }

@@ -242,6 +242,9 @@ public class Hero {
         g.setStroke(new BasicStroke(1));*/
 
 
+    }
 
+    public void reset() {
+        health = maxHealth;
     }
 }

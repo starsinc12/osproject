@@ -14,22 +14,22 @@ public class Fly extends Enemy {
     private int attackTimer;
     private int attackSpeed;
     private int attackDelay;
-
     private int r;
+
     @Override
     public int getR() {
         return r;
     }
 
-    public Fly(int level) {
+    public Fly(int level, int tilex, int tiley) {
         this.level = level;
-        x = (int)( Math.random() * GameLogic.WIDTH);
-        y = 50;
+        x = tilex;
+        y = tiley;
         speed = 3;
         r = 7;
-        health = 40 + (level - 1) * 4;
+        health = 20 + (level - 1) * 4;
         expForKill = 10 + (level - 1) * 4;
-        damage = 50;
+        damage = 200;
 
 
         attackTimer = 15;
@@ -62,8 +62,6 @@ public class Fly extends Enemy {
 
         x += dx;
         y += dy;
-
-
 
         if(x == Hero.getX() && y == Hero.getY()){
             if (attackTimer == 0) {

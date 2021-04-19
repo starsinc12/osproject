@@ -43,13 +43,24 @@ public class Arrow {
     private boolean isReflecting;
 
     public Arrow(boolean isR) {
-        x = Hero.getX();
-        y = Hero.getY();
+
+        double angle = Math.atan((GameLogic.mouseY - Hero.getY()) / ((GameLogic.mouseX == Hero.getX() ) ? 1 : (GameLogic.mouseX - Hero.getX())));
+
+        if(GameLogic.mouseX < Hero.getX()){
+            angle += Math.PI;
+        }
+
+
+        x = (int) (Hero.getX() + Math.cos(angle) * 3);
+        y = (int) (Hero.getY() + Math.sin(angle) * 3);
         r = 5;
         speed = 12;
+
         isReflecting = isR;
         countReflections = 3;
+
         damage = Hero.getDamage();
+
         distX = GameStateManager.mouseX - x;
         distY = GameStateManager.mouseY - y;
         dist = Math.sqrt(distX * distX + distY * distY);

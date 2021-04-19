@@ -7,9 +7,15 @@ import java.awt.*;
 public class HPBar {
 
     private int hpToPix;
+    public boolean isHeroDead;
+
+
 
     public void update() {
         hpToPix = (int) (Hero.getHealth() / Hero.getMaxHealth() * 200);
+        if(hpToPix == 0) {
+            isHeroDead = true;
+        } else isHeroDead = false;
     }
 
     public  void draw(Graphics2D g) {

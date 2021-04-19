@@ -26,6 +26,7 @@ public class PlayState extends GameState {
     public static ArrayList<Arrow> arrows;
     public static ArrayList<Enemy> enemies;
     public static HPBar hpBar;
+    public static Integer enemiesKilled;
 
 
 
@@ -35,7 +36,7 @@ public class PlayState extends GameState {
 
     private BufferedImage map;
     private String mapPath;
-    public static PlayTile[][] tiles = new PlayTile[20][20];
+    public static PlayTile[][] tiles;
 
     public Cursor getCursor() {
         return myCursor;
@@ -45,6 +46,7 @@ public class PlayState extends GameState {
         super(gameStateManager);
         roomNumber = 1;
         currentRoomNumber = 1;
+        enemiesKilled = 0;
     }
 
     @Override
@@ -53,16 +55,8 @@ public class PlayState extends GameState {
         arrows = new ArrayList<Arrow>();
         enemies = new ArrayList<Enemy>();
         hpBar = new HPBar();
-        enemies.add(new Fly(1));
-        mapPath = "src\\images\\maps\\location1\\room" + roomNumber.toString() + ".png";
-        try {
-            map = ImageIO.read(new File(mapPath));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        background.setMap(map, GameLogic.getGraph());
-        tiles = background.getTiles();
-
+        GameLogic.hero.reset();
+        update();
         // Отрисовка и добавление курсора
         Toolkit kit = Toolkit.getDefaultToolkit();
         BufferedImage bufferedImage = new BufferedImage(16,16,BufferedImage.TYPE_INT_ARGB);
@@ -77,13 +71,14 @@ public class PlayState extends GameState {
 
     @Override
     public void update() {
-        if(!currentRoomNumber.equals(roomNumber)) {
+        if(!currentRoomNumber.equals(roomNumber) || map == null) {
             mapPath = "src\\images\\maps\\location1\\room" + roomNumber.toString() + ".png";
             try {
                 map = ImageIO.read(new File(mapPath));
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            tiles = new PlayTile[20][20];
             background.setMap(map, GameLogic.getGraph());
             tiles = background.getTiles();
         }
@@ -108,12 +103,16 @@ public class PlayState extends GameState {
             if(enemies.get(i).isDead()){
                 enemies.remove(i);
                 --i;
+                enemiesKilled += 10;
             }
         }
 
 
         hpBar.update();
-        if(enemies.size() == 0) isOpen = true;
+
+        if(enemies.size() == 0){
+            isOpen = true;
+        } else isOpen = false;
 
     }
 
@@ -131,6 +130,7 @@ public class PlayState extends GameState {
 
     @Override
     public void draw(Graphics2D g) {
+
         background.draw(g);
         GameLogic.hero.draw(g);
         for (Arrow arrow : arrows) {
@@ -140,5 +140,14 @@ public class PlayState extends GameState {
             enemy.draw(g);
         }
         hpBar.draw(g);
+
+        String str = currentRoomNumber.toString() + "/15";
+        g.setColor(Color.cyan);
+        g.setFont(new Font("Calibri", Font.PLAIN, 25));
+        g.drawString(str, 5,25);
+
+        if(hpBar.isHeroDead){
+            GameLogic.gsm.setGameOver(true);
+        }
     }
 }

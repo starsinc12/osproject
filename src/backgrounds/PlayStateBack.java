@@ -21,7 +21,6 @@ public class PlayStateBack {
     private Image grass;
     private Image box;
     BufferedImage bufferedImage = new BufferedImage(GameLogic.WIDTH,GameLogic.HEIGHT,BufferedImage.TYPE_INT_RGB);
-    public static boolean isHeroDead;
 
     public static int tileLength;
 
@@ -32,33 +31,24 @@ public class PlayStateBack {
 
     }
 
-    private void paintMap() {
-
-    }
-
     public void draw(Graphics2D g){
         for (int i = 0; i < map.getWidth(null); i++) {
             for (int j = 0; j < map.getHeight(null); j++) {
                 color = new Color(map.getRGB(j, i));
-                if (color.equals(Color.WHITE)) {
+                if (tiles[j][i].getType() == PlayTile.TYPE.GRASS) {
                     g.drawImage(grass,j * GameLogic.WIDTH / 20,i * GameLogic.HEIGHT / 20,null);
-                    tiles[j][i] = new PlayTile(PlayTile.TYPE.GRASS);
                 }
-                if (color.equals(Color.BLACK)) {
+                if (tiles[j][i].getType() == PlayTile.TYPE.WALL) {
                     g.drawImage(wall,j * GameLogic.WIDTH / 20,i * GameLogic.HEIGHT / 20,null);
-                    tiles[j][i] = new PlayTile(PlayTile.TYPE.WALL);
                 }
-                if (color.equals(new Color(223,113,38))) {
+                if (tiles[j][i].getType() == PlayTile.TYPE.BOX) {
                     g.drawImage(box,j * GameLogic.WIDTH / 20,i * GameLogic.HEIGHT / 20,null);
-                    tiles[j][i] = new PlayTile(PlayTile.TYPE.BOX);
                 }
                 if(color.getRed() == 100 && color.getGreen() == 100) {
                     g.drawImage(grass,j * GameLogic.WIDTH / 20,i * GameLogic.HEIGHT / 20,null);
-                    tiles[j][i] = new PlayTile(PlayTile.TYPE.GRASS);
                 }
             }
         }
-
     }
 
     public void setMap(BufferedImage map, Graphics2D g) {

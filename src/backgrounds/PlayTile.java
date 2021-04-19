@@ -35,7 +35,6 @@ public class PlayTile {
     }
 
     public void hasShooted() {
-
         --hit;
         if(hit <= 0) {
             toGrass();
@@ -56,7 +55,7 @@ public class PlayTile {
         if(this.type == TYPE.BOX) {
             this.walkable = false;
             this.shootable = false;
-            this.hit = 1;
+            this.hit = 2;
         }
     }
 

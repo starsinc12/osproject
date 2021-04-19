@@ -1,13 +1,10 @@
 package elements;
 
 import GameStates.PlayState;
-import backgrounds.PlayTile;
 import logic.GameLogic;
-import logic.GameStart;
 import managers.GameStateManager;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
 
 
 public class Arrow {
@@ -99,25 +96,25 @@ public class Arrow {
     }
 
     private boolean collisionCheckRight() {
-        if (x >= ((GameLogic.WIDTH / 20) * (arrowTileX + 1)) && PlayState.background.getTiles()[arrowTileX + 1][arrowTileY].isClosed()) {
+        if (x >= ((GameLogic.WIDTH / 20) * (arrowTileX + 1)) && !PlayState.background.getTiles()[arrowTileX + 1][arrowTileY].isShootable()) {
             return true;
         } else return false;
     }
 
     private boolean collisionCheckLeft(){
-        if (x <= ((GameLogic.WIDTH / 20) * arrowTileX) && PlayState.background.getTiles()[arrowTileX - 1][arrowTileY].isClosed()) {
+        if (x <= ((GameLogic.WIDTH / 20) * arrowTileX) && !PlayState.background.getTiles()[arrowTileX - 1][arrowTileY].isShootable()) {
             return true;
         } else return false;
     }
 
     private boolean collisionCheckDown() {
-        if (y >= ((GameLogic.WIDTH / 20) * (arrowTileY + 1)) && PlayState.background.getTiles()[arrowTileX][arrowTileY + 1].isClosed()) {
+        if (y >= ((GameLogic.WIDTH / 20) * (arrowTileY + 1)) && !PlayState.background.getTiles()[arrowTileX][arrowTileY + 1].isShootable()) {
             return true;
         } else return false;
     }
 
     private boolean collisionCheckUp(){
-        if (y <= ((GameLogic.HEIGHT / 20) * arrowTileY) && PlayState.background.getTiles()[arrowTileX][arrowTileY - 1].isClosed()) {
+        if (y <= ((GameLogic.HEIGHT / 20) * arrowTileY) && !PlayState.background.getTiles()[arrowTileX][arrowTileY - 1].isShootable()) {
 
             return true;
         } else return false;

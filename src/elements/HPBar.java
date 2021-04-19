@@ -13,7 +13,7 @@ public class HPBar {
 
     public void update() {
         hpToPix = (int) (Hero.getHealth() / Hero.getMaxHealth() * 200);
-        if(hpToPix == 0) {
+        if(hpToPix <= 0) {
             isHeroDead = true;
         } else isHeroDead = false;
     }

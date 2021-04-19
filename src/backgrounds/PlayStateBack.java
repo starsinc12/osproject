@@ -53,7 +53,7 @@ public class PlayStateBack {
                 }
                 if (color.equals(new Color(223,113,38))) {
                     g.drawImage(box,j * GameLogic.WIDTH / 20,i * GameLogic.HEIGHT / 20,null);
-                    tiles[j][i] = new PlayTile(PlayTile.TYPE.WALL2);
+                    tiles[j][i] = new PlayTile(PlayTile.TYPE.BOX);
                 }
                 if(color.getRed() == 100 && color.getGreen() == 100) {
                     g.drawImage(grass,j * GameLogic.WIDTH / 20,i * GameLogic.HEIGHT / 20,null);
@@ -76,7 +76,7 @@ public class PlayStateBack {
                     tiles[j][i] = new PlayTile(PlayTile.TYPE.WALL);
                 }
                 if (color.equals(new Color(223,113,38))) {
-                    tiles[j][i] = new PlayTile(PlayTile.TYPE.WALL2);
+                    tiles[j][i] = new PlayTile(PlayTile.TYPE.BOX);
                 }
                 if(color.getRed() == 100 && color.getGreen() == 100) {
                     if (color.equals(new Color(100,100,0))) {

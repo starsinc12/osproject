@@ -181,25 +181,25 @@ public class Hero {
     }
 
     private boolean collisionCheckRight() {
-        if (x >= ((GameLogic.WIDTH / 20) * (heroTileX + 1) - r) && PlayState.background.getTiles()[heroTileX + 1][heroTileY].isClosed()) {
+        if (x >= ((GameLogic.WIDTH / 20) * (heroTileX + 1) - r) && !PlayState.background.getTiles()[heroTileX + 1][heroTileY].isWalkable()) {
             return false;
         } else return true;
     }
 
     private boolean collisionCheckLeft(){
-        if (x <= ((GameLogic.WIDTH / 20) * heroTileX + r) && PlayState.background.getTiles()[heroTileX - 1][heroTileY].isClosed()) {
+        if (x <= ((GameLogic.WIDTH / 20) * heroTileX + r) && !PlayState.background.getTiles()[heroTileX - 1][heroTileY].isWalkable()) {
             return false;
         } else return true;
     }
 
     private boolean collisionCheckDown() {
-        if (y >= ((GameLogic.WIDTH / 20) * (heroTileY + 1) - r) && PlayState.background.getTiles()[heroTileX][heroTileY + 1].isClosed()) {
+        if (y >= ((GameLogic.WIDTH / 20) * (heroTileY + 1) - r) && !PlayState.background.getTiles()[heroTileX][heroTileY + 1].isWalkable()) {
             return false;
         } else return true;
     }
 
     private boolean collisionCheckUp(){
-        if (y <= ((GameLogic.HEIGHT / 20) * heroTileY + r) && PlayState.background.getTiles()[heroTileX][heroTileY - 1].isClosed()) {
+        if (y <= ((GameLogic.HEIGHT / 20) * heroTileY + r) && !PlayState.background.getTiles()[heroTileX][heroTileY - 1].isWalkable()) {
             return false;
         } else return true;
     }

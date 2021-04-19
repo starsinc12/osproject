@@ -64,7 +64,7 @@ public class Fly extends Enemy {
         x += dx;
         y += dy;
 
-        if(x == Hero.getX() && y == Hero.getY()){
+        if (x == Hero.getX() && y == Hero.getY()){
             if (attackTimer == 0) {
                 GameLogic.hero.hit(damage);
                 attackTimer = attackDelay;
@@ -84,7 +84,6 @@ public class Fly extends Enemy {
         g.drawOval(x - r, y - r , 2 * r, 2 * r);
         g.setStroke(new BasicStroke(2));
 
-        System.out.println(dx + " " + dy);
         if(dx > 0 && dy > 0 || dx < 0 && dy < 0) {
             g.fillOval(x - 2 * r, y + 3 * r / 2 - 2, r,  r); // левое
             g.fillOval(x + r, y - 3 * r / 2, r,  r); // правое

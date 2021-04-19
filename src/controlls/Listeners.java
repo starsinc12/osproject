@@ -32,9 +32,15 @@ public class Listeners implements KeyListener, MouseListener, MouseMotionListene
         if (key == KeyEvent.VK_D) {
             Hero.right = true;
         }
-        if (key == KeyEvent.VK_SPACE) {
-            Hero.isAttack = true;
+        if(GameLogic.gsm.getCurrentState() == GameStateManager.PLAY) {
+            if(key == KeyEvent.VK_ESCAPE){
+                GameLogic.gsm.setPaused(true);
+            }
+            if(key == KeyEvent.VK_ENTER && GameLogic.gsm.isPaused()) {
+                GameLogic.gsm.setPaused(false);
+            }
         }
+
     }
 
     @Override

@@ -1,20 +1,18 @@
 package GameStates;
 
-import elements.Hero;
 import logic.GameLogic;
 import managers.GameStateManager;
 
 import java.awt.*;
 
-public class PauseState extends GameState {
+public class GameOverState extends GameState {
 
-    public PauseState(GameStateManager gameStateManager) {
-        super(gameStateManager);
+    public GameOverState(GameStateManager gsm) {
+        super(gsm);
     }
-
-    public static boolean isResume = false;
     public static boolean isQuit = false;
 
+    private int counter = 0;
     @Override
     public void init() {
 
@@ -22,11 +20,6 @@ public class PauseState extends GameState {
 
     @Override
     public void update() {
-        if (GameLogic.mouseX >= 210 && GameLogic.mouseX <= 590 && GameLogic.mouseY >= 310 && GameLogic.mouseY <= 390) {
-            isResume = true;
-        } else {
-            isResume = false;
-        }
         if (GameLogic.mouseX >= 210 && GameLogic.mouseX <= 590 && GameLogic.mouseY >= 410 && GameLogic.mouseY <= 490) {
             isQuit = true;
         } else {
@@ -42,23 +35,25 @@ public class PauseState extends GameState {
         g.setColor(Color.GRAY);
 
         //КНОПКИ
-        g.fillRect(210,310,380,80);
         g.fillRect(210,410,380,80);
 
-        g.setFont(new Font("TimesRoman", Font.PLAIN, 80));
+        g.setFont(new Font("TimesRoman", Font.PLAIN, 50));
         g.setColor(Color.BLACK);
-        g.drawString("PAUSE",265,280);
+        g.drawString("GAME OVER",250,260);
+        Integer ek = PlayState.enemiesKilled;
+        g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
+        if (counter < ek) ++counter;
+        g.drawString("Enemies Killed: " + Integer.toString(counter), 210, 320);
+        g.drawString("ДЕНЕГ ЗАРАБОТАЛ: 0", 210, 360);
         g.setColor(Color.WHITE);
-        g.drawString("RESUME",230,380);
-        g.drawString("QUIT",310,480);
 
-        if(GameLogic.mouseX >= 210 && GameLogic.mouseX <= 590 && GameLogic.mouseY >= 310 && GameLogic.mouseY <= 390) {
-            g.setColor(new Color(255,255,255,60));
-            g.fillRect(210,310,380,80);
-        }
+        g.setFont(new Font("TimesRoman", Font.PLAIN, 60));
+        g.drawString("QUIT",330,475);
         if(GameLogic.mouseX >= 210 && GameLogic.mouseX <= 590 && GameLogic.mouseY >= 410 && GameLogic.mouseY <= 490) {
             g.setColor(new Color(255,255,255,60));
             g.fillRect(210,410,380,80);
         }
     }
+
+
 }

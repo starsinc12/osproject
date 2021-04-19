@@ -1,6 +1,7 @@
 package backgrounds;
 
 import java.awt.image.BufferedImage;
+import java.lang.reflect.Type;
 
 public class PlayTile {
 
@@ -18,6 +19,7 @@ public class PlayTile {
     }
 
     private TYPE type;
+    public int hit = 0;
     public TYPE getType() {
         return type;
     }
@@ -27,8 +29,11 @@ public class PlayTile {
         return isClosed;
     }
 
+
+
     public PlayTile(TYPE type) {
        this.type = type;
+       if(this.type == TYPE.WALL2) hit = 2;
        if(this.type == TYPE.WALL || this.type == TYPE.WALL2 ) isClosed = true;
        if(this.type == TYPE.GRASS) isClosed = false;
     }

@@ -4,6 +4,7 @@ import backgrounds.PlayTile;
 import elements.Arrow;
 import elements.Enemy;
 import backgrounds.PlayStateBack;
+import elements.HPBar;
 import elements.Hero;
 import elements.enemies.Fly;
 import logic.GameLogic;
@@ -24,6 +25,10 @@ public class PlayState extends GameState {
     public static PlayStateBack background;
     public static ArrayList<Arrow> arrows;
     public static ArrayList<Enemy> enemies;
+    public static HPBar hpBar;
+    public static Integer enemiesKilled;
+
+
 
     public static Integer roomNumber;
     private String roomName;
@@ -31,7 +36,7 @@ public class PlayState extends GameState {
 
     private BufferedImage map;
     private String mapPath;
-    public static PlayTile[][] tiles = new PlayTile[20][20];
+    public static PlayTile[][] tiles;
 
     public Cursor getCursor() {
         return myCursor;
@@ -40,7 +45,8 @@ public class PlayState extends GameState {
     public PlayState(GameStateManager gameStateManager) {
         super(gameStateManager);
         roomNumber = 1;
-        currentRoomNumber = 0;
+        currentRoomNumber = 1;
+        enemiesKilled = 0;
     }
 
     @Override
@@ -48,11 +54,14 @@ public class PlayState extends GameState {
         background = new PlayStateBack();
         arrows = new ArrayList<Arrow>();
         enemies = new ArrayList<Enemy>();
+        hpBar = new HPBar();
+        GameLogic.hero.reset();
+        update();
         // Отрисовка и добавление курсора
         Toolkit kit = Toolkit.getDefaultToolkit();
         BufferedImage bufferedImage = new BufferedImage(16,16,BufferedImage.TYPE_INT_ARGB);
         Graphics2D g3 = (Graphics2D) bufferedImage.getGraphics();
-        g3.setColor(new Color(255,255,255));
+        g3.setColor(new Color(0,0,0));
         g3.drawOval(0,0,4,4);
         g3.drawLine(2,0,2,4);
         g3.drawLine(0,2,4,2);
@@ -62,20 +71,22 @@ public class PlayState extends GameState {
 
     @Override
     public void update() {
-        if(!currentRoomNumber.equals(roomNumber)) {
+        if(!currentRoomNumber.equals(roomNumber) || map == null) {
             mapPath = "src\\images\\maps\\location1\\room" + roomNumber.toString() + ".png";
-            enemies.add(new Fly(1));
             try {
                 map = ImageIO.read(new File(mapPath));
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            background.setMap(map);
+            tiles = new PlayTile[20][20];
+            background.setMap(map, GameLogic.getGraph());
             tiles = background.getTiles();
         }
         roomName = roomNumber.toString() + "/50";
+
         background.update();
         currentRoomNumber = roomNumber;
+
         GameLogic.hero.update(); // roomNumber++
 
         for (int i = 0; i < arrows.size(); i++) {
@@ -92,10 +103,17 @@ public class PlayState extends GameState {
             if(enemies.get(i).isDead()){
                 enemies.remove(i);
                 --i;
+                enemiesKilled++;
             }
         }
 
-        if(enemies.size() == 0) isOpen = true;
+
+        hpBar.update();
+
+        if(enemies.size() == 0){
+            isOpen = true;
+        } else isOpen = false;
+
     }
 
     // проверка столновений выстрелов и врагов
@@ -114,7 +132,6 @@ public class PlayState extends GameState {
     public void draw(Graphics2D g) {
 
         background.draw(g);
-
         GameLogic.hero.draw(g);
         for (Arrow arrow : arrows) {
             arrow.draw(g);
@@ -122,9 +139,15 @@ public class PlayState extends GameState {
         for (Enemy enemy : enemies) {
             enemy.draw(g);
         }
-        g.setColor(Color.CYAN);
-        g.setFont(new Font("Consolas",Font.PLAIN, 21));
-        long length = (int) g.getFontMetrics().getStringBounds(roomName,g).getWidth();
-        g.drawString(roomName, 64 - length, 22);
+        hpBar.draw(g);
+
+        String str = currentRoomNumber.toString() + "/15";
+        g.setColor(Color.cyan);
+        g.setFont(new Font("Calibri", Font.PLAIN, 25));
+        g.drawString(str, 5,25);
+
+        if(hpBar.isHeroDead){
+            GameLogic.gsm.setGameOver(true);
+        }
     }
 }

@@ -6,16 +6,27 @@ import inventory.typesOfEquipment.Ring;
 import inventory.typesOfEquipment.Shoes;
 import inventory.typesOfEquipment.Weapon;
 import logic.GameLogic;
+import managers.GameStateManager;
 import skills.Skill;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
 public class Hero {
 
     private static int x;
     private static int y;
+
+    public static void setX(int x) {
+        Hero.x = x;
+    }
+
+    public static void setY(int y) {
+        Hero.y = y;
+    }
+
     public static int getX() {
         return x;
     }
@@ -35,6 +46,16 @@ public class Hero {
 
 
     private static double health;
+    private static double maxHealth;
+
+    public static double getHealth() {
+        return health;
+    }
+
+    public static double getMaxHealth() {
+        return maxHealth;
+    }
+
     private static double protection;
     private static double damage;
     public static double getDamage() {
@@ -69,31 +90,39 @@ public class Hero {
         y = GameLogic.HEIGHT - 20;
         r = 8;
         speed = 7;
-        health = 3;
-        health = 100;
+        dx = 0;
+        dy = 0;
+        up = false;
+        down = false;
+        left = false;
+        right = false;
+        isAttack = false;
+
+
+
+
         protection = 2;
         damage = 10;
+        health = 1000;
+        maxHealth = health;
+
         level = 1;
         gameLevel = 1;
+
+
         attackTimer = 15;
         attackSpeed = 90;
         changeAttackDelay(attackSpeed);
-
-        dx = 0;
-        dy = 0;
 
         weapon = null;
         armor = null;
         shoes = null;
         ring = null;
 
-        up = false;
-        down = false;
-        left = false;
-        right = false;
-        isAttack = false;
         imgTank = new ImageIcon("src\\images\\tankbezPushki.png").getImage();
         imgPushka = new ImageIcon("src\\images\\Pushka.png").getImage();
+
+
     }
 
     public static void changeAttackDelay(int attackSpeed) {
@@ -111,7 +140,6 @@ public class Hero {
         // ОТВЯЗАТЬ ОТ ФПС
         heroTileX = x / (GameLogic.WIDTH / 20);
         heroTileY =  y / (GameLogic.WIDTH / 20);
-
         if (!(up || down || right || left)) {
             //if(attackTimer < 0) attackTimer = 0;
             isAttack = true;
@@ -178,8 +206,7 @@ public class Hero {
 
     public void draw(Graphics2D g) {
 
-
-        /* AffineTransform orig1;
+        AffineTransform orig1;
         orig1 = g.getTransform();
         AffineTransform newtransX1 = (AffineTransform) orig1.clone();
         g.setTransform(newtransX1);
@@ -205,14 +232,19 @@ public class Hero {
         g.setTransform(newtransX2);
         g.drawImage(imgPushka,(int) x - 24, (int) y - 42, null);
         g.setTransform(orig2);
-        g.setStroke(new BasicStroke(5));*/
+        g.setStroke(new BasicStroke(5));
 
-        g.setColor(Color.white);
+        /*g.setColor(Color.white);
         g.fillOval((int) (x - r), (int) (y - r),2 * r, 2 * r);
         g.setStroke(new BasicStroke(3));
         g.setColor(Color.white.darker());
         g.drawOval((int) (x - r), (int) (y - r),2 * r, 2 * r);
-        g.setStroke(new BasicStroke(1));
+        g.setStroke(new BasicStroke(1));*/
 
+
+    }
+
+    public void reset() {
+        health = maxHealth;
     }
 }

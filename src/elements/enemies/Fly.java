@@ -8,6 +8,7 @@ import logic.GameLogic;
 import managers.GameStateManager;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Fly extends Enemy {
 
@@ -82,8 +83,22 @@ public class Fly extends Enemy {
         g.setColor(Color.BLACK);
         g.drawOval(x - r, y - r , 2 * r, 2 * r);
         g.setStroke(new BasicStroke(2));
-        g.fillOval(x - 2 * r, y - r + r / 2, r,  r);
-        g.fillOval(x + r, y - r + r / 2, r,  r);
+
+        System.out.println(dx + " " + dy);
+        if(dx > 0 && dy > 0 || dx < 0 && dy < 0) {
+            g.fillOval(x - 2 * r, y + 3 * r / 2 - 2, r,  r); // левое
+            g.fillOval(x + r, y - 3 * r / 2, r,  r); // правое
+        } else if(dx > 0 && dy < 0 || dx < 0 && dy > 0) {
+            g.fillOval(x - 2 * r, y - 2 * r, r,  r); // левое
+            g.fillOval(x + r, y + r / 2, r,  r); // правое
+        } else if (dx == 0){
+            g.fillOval(x - 2 * r, y - r + r / 2, r,  r); // левое
+            g.fillOval(x + r, y - r + r / 2, r,  r); // правое
+        } else if (dy == 0){
+            g.fillOval(x - r/2, y - 2 * r, r, r);
+            g.fillOval(x- r/2, y + r, r, r);
+        }
+
     }
     @Override
     public void hit(double heroDamage) {

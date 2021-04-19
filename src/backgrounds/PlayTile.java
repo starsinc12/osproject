@@ -25,32 +25,37 @@ public class PlayTile {
     public TYPE getType() {
         return type;
     }
-    public boolean isWalkable() {
-        return walkable;
-    }
+    public boolean isWalkable() { return walkable; }
     public boolean isShootable() { return shootable; }
 
-    void toGrass() {
-        type = TYPE.GRASS;
-        walkable = true;
-        shootable = true;
+    private void toGrass() {
+        this.type = TYPE.GRASS;
+        this.walkable = true;
+        this.shootable = true;
+    }
+
+    public void hasShooted() {
+        --hit;
+        if(hit <= 0) {
+            toGrass();
+        }
     }
 
     public PlayTile(TYPE type) {
         this.type = type;
         if(this.type == TYPE.GRASS) {
-            walkable = true;
-            shootable = true;
+            this.walkable = true;
+            this.shootable = true;
         }
         if(this.type == TYPE.WALL) {
-            walkable = false;
-            shootable = false;
-            hit = Integer.MAX_VALUE;
+            this.walkable = false;
+            this.shootable = false;
+            this.hit = Integer.MAX_VALUE;
         }
         if(this.type == TYPE.BOX) {
-            walkable = false;
-            shootable = false;
-            hit = 2;
+            this.walkable = false;
+            this.shootable = false;
+            this.hit = 1;
         }
     }
 

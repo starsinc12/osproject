@@ -97,25 +97,32 @@ public class Arrow {
 
     private boolean collisionCheckRight() {
         if (x >= ((GameLogic.WIDTH / 20) * (arrowTileX + 1)) && !PlayState.background.getTiles()[arrowTileX + 1][arrowTileY].isShootable()) {
+            System.out.println("CCR");
+            PlayState.background.getTiles()[arrowTileX + 1][arrowTileY].hasShooted();
             return true;
         } else return false;
     }
 
     private boolean collisionCheckLeft(){
         if (x <= ((GameLogic.WIDTH / 20) * arrowTileX) && !PlayState.background.getTiles()[arrowTileX - 1][arrowTileY].isShootable()) {
+            System.out.println("CCL");
+            PlayState.background.getTiles()[arrowTileX - 1][arrowTileY].hasShooted();
             return true;
         } else return false;
     }
 
     private boolean collisionCheckDown() {
         if (y >= ((GameLogic.WIDTH / 20) * (arrowTileY + 1)) && !PlayState.background.getTiles()[arrowTileX][arrowTileY + 1].isShootable()) {
+            System.out.println("CCD");
+            PlayState.background.getTiles()[arrowTileX][arrowTileY + 1].hasShooted();
             return true;
         } else return false;
     }
 
     private boolean collisionCheckUp(){
         if (y <= ((GameLogic.HEIGHT / 20) * arrowTileY) && !PlayState.background.getTiles()[arrowTileX][arrowTileY - 1].isShootable()) {
-
+            System.out.println("CCU");
+            PlayState.background.getTiles()[arrowTileX][arrowTileY - 1].hasShooted();
             return true;
         } else return false;
     }

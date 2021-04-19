@@ -44,7 +44,6 @@ public class GameOverState extends GameState {
         g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
         if (counter < ek) ++counter;
         g.drawString("Enemies Killed: " + Integer.toString(counter), 210, 320);
-        g.drawString("ДЕНЕГ ЗАРАБОТАЛ: 0", 210, 360);
         g.setColor(Color.WHITE);
 
         g.setFont(new Font("TimesRoman", Font.PLAIN, 60));

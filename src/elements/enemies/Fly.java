@@ -17,11 +17,6 @@ public class Fly extends Enemy {
     private int attackDelay;
     private int r;
 
-    @Override
-    public int getR() {
-        return r;
-    }
-
     public Fly(int level, int tilex, int tiley) {
         this.level = level;
         x = tilex;
@@ -33,7 +28,7 @@ public class Fly extends Enemy {
         damage = 200;
 
 
-        attackTimer = 15;
+        attackTimer = 0;
         attackSpeed = 90;
         attackDelay = 3600 / (attackSpeed + 60);
         if(attackDelay < 6) attackDelay = 6;

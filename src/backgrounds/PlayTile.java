@@ -35,6 +35,7 @@ public class PlayTile {
     }
 
     public void hasShooted() {
+
         --hit;
         if(hit <= 0) {
             toGrass();

@@ -19,6 +19,11 @@ public class GameStateManager {
     private GameOverState gameOverState;
 
     private GameState[] gameStates;
+
+    public GameState[] getGameStates() {
+        return gameStates;
+    }
+
     private int currentState;
     private int previousState;
 
@@ -35,7 +40,7 @@ public class GameStateManager {
     public static final int TALENTS = 1;
     public static final int WORLD = 2;
     public static final int PLAY = 3;
-    public static final int GAMEOVER = 5;
+    public static final int MENU = 4;
 
     public GameStateManager() {
         paused = false;
@@ -43,7 +48,7 @@ public class GameStateManager {
         pauseState = new PauseState(this);
         gameOverState = new GameOverState(this);
         gameStates = new GameState[NUM_STATES];
-        setState(WORLD);
+        setState(MENU);
     }
 
     public void setState(int i) {
@@ -65,6 +70,10 @@ public class GameStateManager {
         }
         else if(i == PLAY) {
             gameStates[i] = new PlayState(this);
+            gameStates[i].init();
+        }
+        else if(i == MENU) {
+            gameStates[i] = new MenuState(this);
             gameStates[i].init();
         }
     }

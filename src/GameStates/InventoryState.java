@@ -33,31 +33,12 @@ public class InventoryState extends GameState {
 
     @Override
     public void update() {
-
-        if(GameLogic.mouseX >= 280 && GameLogic.mouseX <= 520 && GameLogic.mouseY >= 700 && GameLogic.mouseY <= GameLogic.HEIGHT) {
-            isWORLD = true;
-        } else {
-            isWORLD = false;
-        }
-        if(GameLogic.mouseX >= 540 && GameLogic.mouseX <= 780 && GameLogic.mouseY >= 700 && GameLogic.mouseY <= GameLogic.HEIGHT) {
-            isTALENTS = true;
-        } else {
-            isTALENTS = false;
-        }
+        GameLogic.gsm.getGameStates()[GameStateManager.MENU].update();
     }
 
 
     @Override
     public void draw(Graphics2D g) {
-        g.drawImage(img,0,0, GameLogic.WIDTH,GameLogic.HEIGHT,null);
-
-        if(GameLogic.mouseX >= 280 && GameLogic.mouseX <= 520 && GameLogic.mouseY >= 700 && GameLogic.mouseY <= GameLogic.HEIGHT) {
-            g.setColor(new Color(255,255,255,60));
-            g.fillRect(280,700, 240,100);
-        }
-        if(GameLogic.mouseX >= 540 && GameLogic.mouseX <= 780 && GameLogic.mouseY >= 700 && GameLogic.mouseY <= GameLogic.HEIGHT) {
-            g.setColor(new Color(255,255,255,60));
-            g.fillRect(540,700, 240,100);
-        }
+        GameLogic.gsm.getGameStates()[GameStateManager.MENU].draw(g);
     }
 }

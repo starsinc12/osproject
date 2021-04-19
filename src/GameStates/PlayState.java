@@ -103,7 +103,7 @@ public class PlayState extends GameState {
             if(enemies.get(i).isDead()){
                 enemies.remove(i);
                 --i;
-                enemiesKilled += 10;
+                enemiesKilled++;
             }
         }
 

@@ -39,7 +39,7 @@ public class GameOverState extends GameState {
 
         g.setFont(new Font("TimesRoman", Font.PLAIN, 50));
         g.setColor(Color.BLACK);
-        g.drawString("GAME OVER",250,280);
+        g.drawString("GAME OVER",250,260);
         Integer ek = PlayState.enemiesKilled;
         g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
         if (counter < ek) ++counter;

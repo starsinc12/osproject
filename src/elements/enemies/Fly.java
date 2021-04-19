@@ -81,7 +81,9 @@ public class Fly extends Enemy {
         g.setStroke(new BasicStroke(3));
         g.setColor(Color.BLACK);
         g.drawOval(x - r, y - r , 2 * r, 2 * r);
-        g.setStroke(new BasicStroke(3));
+        g.setStroke(new BasicStroke(2));
+        g.fillOval(x - 2 * r, y - r + r / 2, r,  r);
+        g.fillOval(x + r, y - r + r / 2, r,  r);
     }
     @Override
     public void hit(double heroDamage) {

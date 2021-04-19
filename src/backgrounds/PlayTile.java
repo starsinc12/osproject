@@ -29,10 +29,6 @@ public class PlayTile {
         return isClosed;
     }
 
-    public void wallHit(){
-        hit--;
-        System.out.println(hit);
-    }
 
 
     public PlayTile(TYPE type) {

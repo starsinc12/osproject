@@ -4,6 +4,7 @@ import backgrounds.PlayTile;
 import elements.Arrow;
 import elements.Enemy;
 import backgrounds.PlayStateBack;
+import elements.HPBar;
 import elements.Hero;
 import elements.enemies.Fly;
 import logic.GameLogic;
@@ -24,6 +25,9 @@ public class PlayState extends GameState {
     public static PlayStateBack background;
     public static ArrayList<Arrow> arrows;
     public static ArrayList<Enemy> enemies;
+    public static HPBar hpBar;
+
+
 
     public static Integer roomNumber;
     private String roomName;
@@ -48,9 +52,9 @@ public class PlayState extends GameState {
         background = new PlayStateBack();
         arrows = new ArrayList<Arrow>();
         enemies = new ArrayList<Enemy>();
-
-        mapPath = "src\\images\\maps\\location1\\room" + roomNumber.toString() + ".png";
+        hpBar = new HPBar();
         enemies.add(new Fly(1));
+        mapPath = "src\\images\\maps\\location1\\room" + roomNumber.toString() + ".png";
         try {
             map = ImageIO.read(new File(mapPath));
         } catch (IOException e) {
@@ -75,7 +79,6 @@ public class PlayState extends GameState {
     public void update() {
         if(!currentRoomNumber.equals(roomNumber)) {
             mapPath = "src\\images\\maps\\location1\\room" + roomNumber.toString() + ".png";
-            enemies.add(new Fly(1));
             try {
                 map = ImageIO.read(new File(mapPath));
             } catch (IOException e) {
@@ -107,6 +110,9 @@ public class PlayState extends GameState {
                 --i;
             }
         }
+
+
+        hpBar.update();
         if(enemies.size() == 0) isOpen = true;
 
     }
@@ -133,5 +139,6 @@ public class PlayState extends GameState {
         for (Enemy enemy : enemies) {
             enemy.draw(g);
         }
+        hpBar.draw(g);
     }
 }

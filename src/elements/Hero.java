@@ -48,6 +48,14 @@ public class Hero {
     private static double health;
     private static double maxHealth;
 
+    public static double getHealth() {
+        return health;
+    }
+
+    public static double getMaxHealth() {
+        return maxHealth;
+    }
+
     private static double protection;
     private static double damage;
     public static double getDamage() {
@@ -82,32 +90,39 @@ public class Hero {
         y = GameLogic.HEIGHT - 20;
         r = 8;
         speed = 7;
-        health = 3;
-        health = 100;
-        maxHealth = health;
+        dx = 0;
+        dy = 0;
+        up = false;
+        down = false;
+        left = false;
+        right = false;
+        isAttack = false;
+
+
+
+
         protection = 2;
         damage = 10;
+        health = 1000;
+        maxHealth = health;
+
         level = 1;
         gameLevel = 1;
+
+
         attackTimer = 15;
         attackSpeed = 90;
         changeAttackDelay(attackSpeed);
-
-        dx = 0;
-        dy = 0;
 
         weapon = null;
         armor = null;
         shoes = null;
         ring = null;
 
-        up = false;
-        down = false;
-        left = false;
-        right = false;
-        isAttack = false;
         imgTank = new ImageIcon("src\\images\\tankbezPushki.png").getImage();
         imgPushka = new ImageIcon("src\\images\\Pushka.png").getImage();
+
+
     }
 
     public static void changeAttackDelay(int attackSpeed) {
@@ -125,7 +140,6 @@ public class Hero {
         // ОТВЯЗАТЬ ОТ ФПС
         heroTileX = x / (GameLogic.WIDTH / 20);
         heroTileY =  y / (GameLogic.WIDTH / 20);
-        System.out.println(heroTileX + " " + heroTileY);
         if (!(up || down || right || left)) {
             //if(attackTimer < 0) attackTimer = 0;
             isAttack = true;
@@ -226,6 +240,8 @@ public class Hero {
         g.setColor(Color.white.darker());
         g.drawOval((int) (x - r), (int) (y - r),2 * r, 2 * r);
         g.setStroke(new BasicStroke(1));*/
+
+
 
     }
 }

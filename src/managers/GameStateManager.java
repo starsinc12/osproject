@@ -32,7 +32,6 @@ public class GameStateManager {
     public static final int TALENTS = 1;
     public static final int WORLD = 2;
     public static final int PLAY = 3;
-    public static final int PAUSE = 4;
 
     public GameStateManager() {
         paused = false;

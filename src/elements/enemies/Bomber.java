@@ -30,6 +30,8 @@ public class Bomber extends Enemy {
     public void update() {
         distX = Hero.getX() - x;
         distY = Hero.getY() - y;
+        distX = Hero.getX() - x;
+        distY = Hero.getY() - y;
 
         if(distX == 0 && distY == 0) {
             dist = 1;
@@ -52,6 +54,11 @@ public class Bomber extends Enemy {
     @Override
     public boolean isDead() {
         return false;
+    }
+
+    @Override
+    public int getR() {
+        return 0;
     }
 
 }

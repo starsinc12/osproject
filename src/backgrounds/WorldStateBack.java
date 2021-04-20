@@ -29,11 +29,6 @@ public class WorldStateBack {
         } else {
             isINVENTORY = false;
         }
-        if(GameLogic.mouseX >= 280 && GameLogic.mouseX <= 520 && GameLogic.mouseY >= 700 && GameLogic.mouseY <= GameLogic.HEIGHT) {
-            isWORLD = true;
-        } else {
-            isWORLD = false;
-        }
         if(GameLogic.mouseX >= 540 && GameLogic.mouseX <= 780 && GameLogic.mouseY >= 700 && GameLogic.mouseY <= GameLogic.HEIGHT) {
             isTALENTS = true;
         } else {
@@ -52,10 +47,6 @@ public class WorldStateBack {
         if(GameLogic.mouseX >= 20 && GameLogic.mouseX <= 260 && GameLogic.mouseY >= 700 && GameLogic.mouseY <= GameLogic.HEIGHT) {
             g.setColor(new Color(255,255,255,60));
             g.fillRect(20,700, 240,100);
-        }
-        if(GameLogic.mouseX >= 280 && GameLogic.mouseX <= 520 && GameLogic.mouseY >= 700 && GameLogic.mouseY <= GameLogic.HEIGHT) {
-            g.setColor(new Color(255,255,255,60));
-            g.fillRect(280,700, 240,100);
         }
         if(GameLogic.mouseX >= 540 && GameLogic.mouseX <= 780 && GameLogic.mouseY >= 700 && GameLogic.mouseY <= GameLogic.HEIGHT) {
             g.setColor(new Color(255,255,255,60));

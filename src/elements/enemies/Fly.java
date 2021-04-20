@@ -109,5 +109,10 @@ public class Fly extends Enemy {
         return health <= 0;
     }
 
+    @Override
+    public int getR() {
+        return 0;
+    }
+
 
 }

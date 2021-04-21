@@ -39,7 +39,7 @@ public class GameStateManager {
     public static int mouseY;
     public static boolean leftMouse;
 
-    public static final int NUM_STATES = 6;
+    public static final int NUM_STATES = 5;
     public static final int INVENTORY = 0;
     public static final int TALENTS = 1;
     public static final int WORLD = 2;

@@ -72,6 +72,7 @@ public class PlayState extends GameState {
     @Override
     public void update() {
         if(!currentRoomNumber.equals(roomNumber) || map == null) {
+            arrows.clear();
             mapPath = "src\\images\\maps\\location1\\room" + roomNumber.toString() + ".png";
             try {
                 map = ImageIO.read(new File(mapPath));
@@ -114,6 +115,10 @@ public class PlayState extends GameState {
             isOpen = true;
         } else isOpen = false;
 
+        if(currentRoomNumber == 7 && !hpBar.isHeroDead) {
+            GameLogic.gsm.setWin(true);
+        }
+
     }
 
     // проверка столновений выстрелов и врагов
@@ -133,6 +138,8 @@ public class PlayState extends GameState {
 
         background.draw(g);
 
+
+
         GameLogic.hero.draw(g);
         for (Arrow arrow : arrows) {
             arrow.draw(g);
@@ -147,8 +154,9 @@ public class PlayState extends GameState {
         g.setFont(new Font("Calibri", Font.PLAIN, 25));
         g.drawString(str, 5,25);
 
-        if(hpBar.isHeroDead){
+        if(hpBar.isHeroDead) {
             GameLogic.gsm.setGameOver(true);
         }
+
     }
 }

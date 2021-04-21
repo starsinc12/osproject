@@ -33,7 +33,7 @@ public class Fly extends Enemy {
         damage = 200;
 
 
-        attackTimer = 15;
+        attackTimer = 0;
         attackSpeed = 90;
         attackDelay = 3600 / (attackSpeed + 60);
         if(attackDelay < 6) attackDelay = 6;

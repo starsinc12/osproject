@@ -83,6 +83,9 @@ public class MenuStateBack {
             }
         }
         if(GameLogic.gsm.getCurrentState() == GameStateManager.WORLD || GameLogic.gsm.getCurrentState() == GameStateManager.MENU) {
+            g.setColor(Color.BLACK);
+            g.setFont(new Font("TimesRoman", Font.PLAIN, 60));
+            g.drawString("Location #1", 250,120);
             if (GameLogic.mouseX >= 260 && GameLogic.mouseX <= 540 && GameLogic.mouseY >= 175 && GameLogic.mouseY <= 455) {
                 g.setColor(new Color(255, 255, 255, 60));
                 g.fillRect(260, 175, 280, 280);

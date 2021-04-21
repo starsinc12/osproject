@@ -1,12 +1,11 @@
 package GameStates;
 
 import backgrounds.PlayTile;
-import elements.Arrow;
+import elements.Bullet;
 import elements.Enemy;
 import backgrounds.PlayStateBack;
 import elements.HPBar;
 import elements.Hero;
-import elements.enemies.Fly;
 import logic.GameLogic;
 import managers.GameStateManager;
 import javax.imageio.ImageIO;
@@ -23,7 +22,7 @@ public class PlayState extends GameState {
     private Cursor myCursor;
 
     public static PlayStateBack background;
-    public static ArrayList<Arrow> arrows;
+    public static ArrayList<Bullet> bullets;
     public static ArrayList<Enemy> enemies;
     public static HPBar hpBar;
     public static Integer enemiesKilled;
@@ -52,7 +51,7 @@ public class PlayState extends GameState {
     @Override
     public void init() {
         background = new PlayStateBack();
-        arrows = new ArrayList<Arrow>();
+        bullets = new ArrayList<Bullet>();
         enemies = new ArrayList<Enemy>();
         hpBar = new HPBar();
         GameLogic.hero.reset();
@@ -72,7 +71,7 @@ public class PlayState extends GameState {
     @Override
     public void update() {
         if(!currentRoomNumber.equals(roomNumber) || map == null) {
-            arrows.clear();
+            bullets.clear();
             mapPath = "src\\images\\maps\\location1\\room" + roomNumber.toString() + ".png";
             try {
                 map = ImageIO.read(new File(mapPath));
@@ -90,10 +89,10 @@ public class PlayState extends GameState {
 
         GameLogic.hero.update(); // roomNumber++
 
-        for (int i = 0; i < arrows.size(); i++) {
-            arrows.get(i).update();
-            if(arrows.get(i).remove()){
-                arrows.remove(i);
+        for (int i = 0; i < bullets.size(); i++) {
+            bullets.get(i).update();
+            if(bullets.get(i).remove()){
+                bullets.remove(i);
                 --i;
             }
         }
@@ -123,11 +122,11 @@ public class PlayState extends GameState {
 
     // проверка столновений выстрелов и врагов
     private void collisionArrowEnemy(int a) {
-        for (int i=0; i < arrows.size(); i++) {
-            double dist = Math.sqrt(Math.pow(enemies.get(a).getX() - arrows.get(i).getX(),2) + Math.pow(enemies.get(a).getY() - arrows.get(i).getY(),2));
-            if(dist <= enemies.get(a).getR() + arrows.get(i).getR()) {
+        for (int i = 0; i < bullets.size(); i++) {
+            double dist = Math.sqrt(Math.pow(enemies.get(a).getX() - bullets.get(i).getX(),2) + Math.pow(enemies.get(a).getY() - bullets.get(i).getY(),2));
+            if(dist <= enemies.get(a).getR() + bullets.get(i).getR()) {
                 enemies.get(a).hit(Hero.getDamage());
-                arrows.remove(i);
+                bullets.remove(i);
                 --i;
             }
         }
@@ -141,8 +140,8 @@ public class PlayState extends GameState {
 
 
         GameLogic.hero.draw(g);
-        for (Arrow arrow : arrows) {
-            arrow.draw(g);
+        for (Bullet bullet : bullets) {
+            bullet.draw(g);
         }
         for (Enemy enemy : enemies) {
             enemy.draw(g);

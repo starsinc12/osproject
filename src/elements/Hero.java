@@ -144,7 +144,7 @@ public class Hero {
             //if(attackTimer < 0) attackTimer = 0;
             isAttack = true;
             if (attackTimer == 0) {
-                PlayState.arrows.add(new Arrow(false));
+                PlayState.bullets.add(new Bullet(false));
                 attackTimer = attackDelay;
             }
             --attackTimer;

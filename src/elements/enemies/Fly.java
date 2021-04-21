@@ -1,14 +1,10 @@
 package elements.enemies;
 
-import GameStates.PlayState;
-import elements.Arrow;
 import elements.Enemy;
 import elements.Hero;
 import logic.GameLogic;
-import managers.GameStateManager;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class Fly extends Enemy {
 

@@ -15,6 +15,5 @@ public class GameStart {
         startFrame.setResizable(false);
         gl.start();
     }
-
 }
 

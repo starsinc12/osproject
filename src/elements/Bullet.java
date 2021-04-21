@@ -7,13 +7,13 @@ import managers.GameStateManager;
 import java.awt.*;
 
 
-public class Arrow {
+public class Bullet {
 
     private int x;
     private int y;
     private int countReflections;
-    private int arrowTileX;
-    private int arrowTileY;
+    private int bulletTileX;
+    private int bulletTileY;
 
     public double getX() {
         return x;
@@ -39,7 +39,7 @@ public class Arrow {
 
     private boolean isReflecting;
 
-    public Arrow(boolean isR) {
+    public Bullet(boolean isR) {
 
         double angle = Math.atan((GameLogic.mouseY - Hero.getY()) / ((GameLogic.mouseX == Hero.getX() ) ? 1 : (GameLogic.mouseX - Hero.getX())));
 
@@ -68,8 +68,8 @@ public class Arrow {
     }
 
     public void update() {
-        arrowTileX = x / (GameLogic.WIDTH / 20);
-        arrowTileY =  y / (GameLogic.WIDTH / 20);
+        bulletTileX = x / (GameLogic.WIDTH / 20);
+        bulletTileY =  y / (GameLogic.WIDTH / 20);
         if(isReflecting && countReflections != 0) {
 
         }
@@ -96,29 +96,29 @@ public class Arrow {
     }
 
     private boolean collisionCheckRight() {
-        if (x >= ((GameLogic.WIDTH / 20) * (arrowTileX + 1)) && !PlayState.background.getTiles()[arrowTileX + 1][arrowTileY].isShootable()) {
-            PlayState.background.getTiles()[arrowTileX + 1][arrowTileY].hasShooted();
+        if (x >= ((GameLogic.WIDTH / 20) * (bulletTileX + 1)) && !PlayState.background.getTiles()[bulletTileX + 1][bulletTileY].isShootable()) {
+            PlayState.background.getTiles()[bulletTileX + 1][bulletTileY].hasShooted();
             return true;
         } else return false;
     }
 
     private boolean collisionCheckLeft(){
-        if (x <= ((GameLogic.WIDTH / 20) * arrowTileX) && !PlayState.background.getTiles()[arrowTileX - 1][arrowTileY].isShootable()) {
-            PlayState.background.getTiles()[arrowTileX - 1][arrowTileY].hasShooted();
+        if (x <= ((GameLogic.WIDTH / 20) * bulletTileX) && !PlayState.background.getTiles()[bulletTileX - 1][bulletTileY].isShootable()) {
+            PlayState.background.getTiles()[bulletTileX - 1][bulletTileY].hasShooted();
             return true;
         } else return false;
     }
 
     private boolean collisionCheckDown() {
-        if (y >= ((GameLogic.WIDTH / 20) * (arrowTileY + 1)) && !PlayState.background.getTiles()[arrowTileX][arrowTileY + 1].isShootable()) {
-            PlayState.background.getTiles()[arrowTileX][arrowTileY + 1].hasShooted();
+        if (y >= ((GameLogic.WIDTH / 20) * (bulletTileY + 1)) && !PlayState.background.getTiles()[bulletTileX][bulletTileY + 1].isShootable()) {
+            PlayState.background.getTiles()[bulletTileX][bulletTileY + 1].hasShooted();
             return true;
         } else return false;
     }
 
     private boolean collisionCheckUp(){
-        if (y <= ((GameLogic.HEIGHT / 20) * arrowTileY) && !PlayState.background.getTiles()[arrowTileX][arrowTileY - 1].isShootable()) {
-            PlayState.background.getTiles()[arrowTileX][arrowTileY - 1].hasShooted();
+        if (y <= ((GameLogic.HEIGHT / 20) * bulletTileY) && !PlayState.background.getTiles()[bulletTileX][bulletTileY - 1].isShootable()) {
+            PlayState.background.getTiles()[bulletTileX][bulletTileY - 1].hasShooted();
             return true;
         } else return false;
     }

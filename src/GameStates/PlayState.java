@@ -157,5 +157,9 @@ public class PlayState extends GameState {
             GameLogic.gsm.setGameOver(true);
         }
 
+        g.setStroke(new BasicStroke(3));
+        g.drawLine(Hero.getX(), Hero.getY(), enemies.get(1).getX(), enemies.get(1).getY());
+        g.drawLine(Hero.getX(), Hero.getY(), enemies.get(1).getX(), Hero.getY());
+        g.drawLine(enemies.get(1).getX(), Hero.getY(), enemies.get(1).getX(), enemies.get(1).getY());
     }
 }

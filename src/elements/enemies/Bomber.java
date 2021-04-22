@@ -19,7 +19,7 @@ public class Bomber extends Enemy {
         this.level = level;
         x = tilex;
         y = tiley;
-        speed = 8;
+        speed = 3;
         r = 10;
         health = 20 + (level - 1) * 4;
         expForKill = 10 + (level - 1) * 4;
@@ -44,26 +44,26 @@ public class Bomber extends Enemy {
 
     private boolean collisionCheckRight() {
         if (x >= ((GameLogic.WIDTH / 20) * (enemyTileX + 1) - r) && !PlayState.background.getTiles()[enemyTileX + 1][enemyTileY].isWalkable()) {
-            return false;
-        } else return true;
+            return true;
+        } else return false;
     }
 
     private boolean collisionCheckLeft(){
         if (x <= ((GameLogic.WIDTH / 20) * enemyTileX + r) && !PlayState.background.getTiles()[enemyTileY - 1][enemyTileY].isWalkable()) {
-            return false;
-        } else return true;
+            return true;
+        } else return false;
     }
 
     private boolean collisionCheckDown() {
         if (y >= ((GameLogic.WIDTH / 20) * (enemyTileY + 1) - r) && !PlayState.background.getTiles()[enemyTileX][enemyTileY + 1].isWalkable()) {
-            return false;
-        } else return true;
+            return true;
+        } else return false;
     }
 
     private boolean collisionCheckUp(){
         if (y <= ((GameLogic.HEIGHT / 20) * enemyTileY + r) && !PlayState.background.getTiles()[enemyTileX][enemyTileY - 1].isWalkable()) {
-            return false;
-        } else return true;
+            return true;
+        } else return false;
     }
 
 
@@ -92,6 +92,11 @@ public class Bomber extends Enemy {
         if(x == Hero.getX() || y == Hero.getY()){
             dy = dy / Math.sqrt(2);
             dx = dx / Math.sqrt(2);
+        }
+        if(collisionCheckLeft() || collisionCheckRight()) {
+            dx = 0;
+        } else if(collisionCheckDown() || collisionCheckUp()) {
+            dy = 0;
         }
         x += dx;
         y += dy;

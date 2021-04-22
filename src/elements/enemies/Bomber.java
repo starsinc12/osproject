@@ -3,6 +3,7 @@ package elements.enemies;
 import GameStates.PlayState;
 import elements.Enemy;
 import elements.Hero;
+import logic.GameLogic;
 
 import java.awt.*;
 
@@ -22,8 +23,7 @@ public class Bomber extends Enemy {
         r = 10;
         health = 20 + (level - 1) * 4;
         expForKill = 10 + (level - 1) * 4;
-        damage = 300;
-
+        damage = 400;
     }
 
     @Override
@@ -87,7 +87,25 @@ public class Bomber extends Enemy {
         } else {
             dist = Math.sqrt(distX * distX + distY * distY);
         }
+        dx = distX / dist * speed;
+        dy = distY / dist * speed;
+        if(x == Hero.getX() || y == Hero.getY()){
+            dy = dy / Math.sqrt(2);
+            dx = dx / Math.sqrt(2);
+        }
+        x += dx;
+        y += dy;
 
+
+
+
+
+
+        // ВЗАИМОДЕЙСТВИЕ С ГЕРОЕМ
+        if (x == Hero.getX() && y == Hero.getY()){
+            GameLogic.hero.hit(damage);
+            health = 0;
+        }
     }
 
 

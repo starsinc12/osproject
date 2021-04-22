@@ -13,9 +13,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
+import Sounds.Audio;
 
 public class Hero {
-
+    public static Audio vistrel;
     private static int x;
     private static int y;
 
@@ -143,6 +144,9 @@ public class Hero {
             if (attackTimer == 0) {
                 PlayState.bullets.add(new Bullet(false));
                 attackTimer = attackDelay;
+                vistrel = new Audio("src//Sounds//vistrel.wav",0.7);
+                vistrel.sound();
+                vistrel.setVolume();
             }
             --attackTimer;
         } else {

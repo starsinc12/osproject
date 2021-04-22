@@ -67,11 +67,7 @@ public class Bomber extends Enemy {
     }
 
 
-    private int[] DeicstrasAlg() {
-        int[] dxdy = new int[2];
 
-        return dxdy;
-    }
 
     @Override
     public void update() {

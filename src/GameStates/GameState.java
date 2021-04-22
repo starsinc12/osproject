@@ -18,4 +18,5 @@ public abstract class GameState  extends JPanel {
     public abstract void update();
 
     public abstract void draw(Graphics2D g);
+
 }

@@ -11,11 +11,15 @@ public class GameStateManager {
     private boolean paused;
     private boolean gameOver;
     private boolean iswin;
-
-
-
     public boolean isPaused() {
         return paused;
+    }
+    public void setPaused(boolean b) {
+        paused = b;
+    }
+    public void setGameOver(boolean g) { gameOver = g;}
+    public void setWin(boolean w) {
+        iswin = w;
     }
 
     private PauseState pauseState;
@@ -23,28 +27,26 @@ public class GameStateManager {
     private WinState winState;
 
     private GameState[] gameStates;
-
     public GameState[] getGameStates() {
         return gameStates;
     }
 
     private int currentState;
-    private int previousState;
-
     public int getCurrentState() {
         return currentState;
     }
+
+    private int previousState;
 
     public static int mouseX;
     public static int mouseY;
     public static boolean leftMouse;
 
-    public static final int NUM_STATES = 5;
+    public static final int NUM_STATES = 4;
     public static final int INVENTORY = 0;
     public static final int TALENTS = 1;
     public static final int WORLD = 2;
     public static final int PLAY = 3;
-    public static final int MENU = 4;
 
     public GameStateManager() {
         paused = false;
@@ -53,7 +55,7 @@ public class GameStateManager {
         gameOverState = new GameOverState(this);
         winState = new WinState(this);
         gameStates = new GameState[NUM_STATES];
-        setState(MENU);
+        setState(WORLD);
     }
 
     public void setState(int i) {
@@ -77,22 +79,10 @@ public class GameStateManager {
             gameStates[i] = new PlayState(this);
             gameStates[i].init();
         }
-        else if(i == MENU) {
-            gameStates[i] = new MenuState(this);
-            gameStates[i].init();
-        }
     }
 
     public void unloadState(int i) {
         gameStates[i] = null;
-    }
-
-    public void setPaused(boolean b) {
-        paused = b;
-    }
-    public void setGameOver(boolean g) { gameOver = g;}
-    public void setWin(boolean w) {
-        iswin = w;
     }
 
     public void update() {
@@ -135,6 +125,7 @@ public class GameStateManager {
             mouseX = GameLogic.mouseX;
             mouseY = GameLogic.mouseY;
         }
+        System.out.println(currentState);
     }
 
     private void setStateResumeGame() {

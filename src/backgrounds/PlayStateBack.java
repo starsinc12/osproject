@@ -1,6 +1,7 @@
 package backgrounds;
 
 import GameStates.PlayState;
+import elements.enemies.Bomber;
 import elements.enemies.Fly;
 import logic.GameLogic;
 import javax.imageio.ImageIO;
@@ -66,14 +67,18 @@ public class PlayStateBack {
                     tiles[j][i] = new PlayTile(PlayTile.TYPE.BOX);
                 }
                 if(color.getRed() == 100 && color.getGreen() == 100) {
-                    if (color.equals(new Color(100,100,0))) {
+                    if (color.getBlue() == 0) {
                         tiles[j][i] = new PlayTile(PlayTile.TYPE.GRASS);
                         PlayState.enemies.add(new Fly(1,(j * GameLogic.WIDTH / 20) + 20,(i * GameLogic.HEIGHT / 20) + 20));
                     }
+                    if (color.getBlue() == 1) {
+                        tiles[j][i] = new PlayTile(PlayTile.TYPE.GRASS);
+                        PlayState.enemies.add(new Bomber(1,(j * GameLogic.WIDTH / 20) + 20,(i * GameLogic.HEIGHT / 20) + 20));
+                    }
                 }
-
             }
         }
+
         try {
             wall = ImageIO.read(new File("src\\images\\sprites\\wall.png"));
             grass = ImageIO.read(new File("src\\images\\sprites\\grass.png"));

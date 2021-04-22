@@ -98,9 +98,6 @@ public class Hero {
         right = false;
         isAttack = false;
 
-
-
-
         protection = 2;
         damage = 10;
         health = 1000;

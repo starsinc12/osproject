@@ -8,12 +8,13 @@ public abstract class Enemy {
     protected int y;
     protected double dx;
     protected double dy;
+    protected int enemyTileX;
+    protected int enemyTileY;
 
     protected double speed;
     protected double health;
     protected int level;
     protected double damage;
-    protected double protection;
     protected int expForKill;
     public int getExpForKill() {
         return expForKill;
@@ -31,7 +32,6 @@ public abstract class Enemy {
     public int getX() {
         return x;
     }
-
     public int getY() {
         return y;
     }

@@ -28,7 +28,6 @@ public class Fly extends Enemy {
         expForKill = 10 + (level - 1) * 4;
         damage = 200;
 
-
         attackTimer = 0;
         attackSpeed = 90;
         attackDelay = 3600 / (attackSpeed + 60);

@@ -1,5 +1,6 @@
 package elements.enemies;
 
+import GameStates.PlayState;
 import elements.Enemy;
 import elements.Hero;
 
@@ -17,7 +18,7 @@ public class Bomber extends Enemy {
         this.level = level;
         x = tilex;
         y = tiley;
-        speed = 3;
+        speed = 8;
         r = 10;
         health = 20 + (level - 1) * 4;
         expForKill = 10 + (level - 1) * 4;
@@ -25,12 +26,62 @@ public class Bomber extends Enemy {
 
     }
 
+    @Override
+    public void hit(double heroDamage) {
+        health = 0;
+    }
+
+    @Override
+    public boolean isDead() {
+        return health <= 0;
+    }
+
+    @Override
+    public int getR() {
+        return 0;
+    }
+
+
+    private boolean collisionCheckRight() {
+        if (x >= ((GameLogic.WIDTH / 20) * (enemyTileX + 1) - r) && !PlayState.background.getTiles()[enemyTileX + 1][enemyTileY].isWalkable()) {
+            return false;
+        } else return true;
+    }
+
+    private boolean collisionCheckLeft(){
+        if (x <= ((GameLogic.WIDTH / 20) * enemyTileX + r) && !PlayState.background.getTiles()[enemyTileY - 1][enemyTileY].isWalkable()) {
+            return false;
+        } else return true;
+    }
+
+    private boolean collisionCheckDown() {
+        if (y >= ((GameLogic.WIDTH / 20) * (enemyTileY + 1) - r) && !PlayState.background.getTiles()[enemyTileX][enemyTileY + 1].isWalkable()) {
+            return false;
+        } else return true;
+    }
+
+    private boolean collisionCheckUp(){
+        if (y <= ((GameLogic.HEIGHT / 20) * enemyTileY + r) && !PlayState.background.getTiles()[enemyTileX][enemyTileY - 1].isWalkable()) {
+            return false;
+        } else return true;
+    }
+
+
+    private int[] DeicstrasAlg() {
+        int[] dxdy = new int[2];
+
+        return dxdy;
+    }
 
     @Override
     public void update() {
+
+        enemyTileX = x / (GameLogic.WIDTH / 20);
+        enemyTileY =  y / (GameLogic.WIDTH / 20);
+
+        // ПЕРЕМЕЩЕНИЕ
         distX = Hero.getX() - x;
         distY = Hero.getY() - y;
-
         if(distX == 0 && distY == 0) {
             dist = 1;
         } else {
@@ -39,24 +90,25 @@ public class Bomber extends Enemy {
 
     }
 
+
+
+
+
+
     @Override
     public void draw(Graphics2D g) {
-
-    }
-
-    @Override
-    public void hit(double heroDamage) {
-
-    }
-
-    @Override
-    public boolean isDead() {
-        return false;
-    }
-
-    @Override
-    public int getR() {
-        return 0;
+        g.setColor(Color.BLACK);
+        g.fillOval(x - r, y - r , 2 * r, 2 * r);
+        g.setStroke(new BasicStroke(3));
+        g.setColor(Color.BLACK);
+        g.drawOval(x - r, y - r , 2 * r, 2 * r);
+        g.setStroke(new BasicStroke(2));
+        g.setColor(Color.RED);
+        g.fillOval(x - r / 2, y - r / 2 ,  r,  r);
+        g.setStroke(new BasicStroke(3));
+        g.setColor(Color.BLACK);
+        g.drawOval(x - r / 2, y - r / 2 ,   r,  r);
+        g.setStroke(new BasicStroke(2));
     }
 
 }

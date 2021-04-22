@@ -18,6 +18,11 @@ public class PlayTile {
     }
 
     private TYPE type;
+    private TYPE left;
+    private TYPE right;
+    private TYPE up;
+    private TYPE down;
+
     public int hit = 0;
     private boolean walkable;
     private boolean shootable;

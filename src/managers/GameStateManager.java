@@ -9,6 +9,7 @@ import java.awt.*;
 public class GameStateManager {
 
     private boolean paused;
+    private boolean isSettings;
     private boolean gameOver;
     private boolean iswin;
     public boolean isPaused() {
@@ -21,10 +22,13 @@ public class GameStateManager {
     public void setWin(boolean w) {
         iswin = w;
     }
+    public void setSettings(boolean s){isSettings = s;}
+
 
     private PauseState pauseState;
     private GameOverState gameOverState;
     private WinState winState;
+    private SettingState settingState;
 
     private GameState[] gameStates;
     public GameState[] getGameStates() {
@@ -51,10 +55,14 @@ public class GameStateManager {
     public GameStateManager() {
         paused = false;
         gameOver = false;
+        isSettings= false;
+        iswin=false;
         pauseState = new PauseState(this);
         gameOverState = new GameOverState(this);
         winState = new WinState(this);
+        settingState= new SettingState(this);
         gameStates = new GameState[NUM_STATES];
+
         setState(WORLD);
     }
 
@@ -100,6 +108,17 @@ public class GameStateManager {
                     paused = false;
                 }
             }
+        } else if (isSettings) {
+            settingState.update();
+            if(GameLogic.leftMouse){
+                if(SettingState.isQuit){
+                    Hero.setX(GameLogic.WIDTH / 2);
+                    Hero.setY(GameLogic.HEIGHT - 20);
+                    GameLogic.gsm.setState(GameStateManager.WORLD);
+                    isSettings = false;
+                }
+            }
+
         } else if (gameOver) {
             gameOverState.update();
             if(GameLogic.leftMouse){
@@ -136,11 +155,13 @@ public class GameStateManager {
     public void draw(Graphics2D g) {
         if(paused) {
             pauseState.draw(g);
-        } else if(gameOver) {
+        } else if (isSettings) {
+             settingState.draw(g);
+        } else if (gameOver) {
             gameOverState.draw(g);
         } else if (iswin) {
             winState.draw(g);
-        } else if(gameStates[currentState] != null) {
+        } else if (gameStates[currentState] != null) {
             gameStates[currentState].draw(g);
         }
     }

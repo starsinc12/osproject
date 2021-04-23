@@ -1,6 +1,7 @@
 package elements.enemies;
 
 import GameStates.PlayState;
+import Sounds.Audio;
 import elements.Enemy;
 import elements.Hero;
 import logic.GameLogic;
@@ -14,6 +15,7 @@ public class Bomber extends Enemy {
     private boolean down;
     private boolean left;
     private boolean right;
+    public static Audio boom;
 
     public Bomber(int level, int tilex, int tiley) {
         this.level = level;
@@ -104,6 +106,9 @@ public class Bomber extends Enemy {
 
         // ВЗАИМОДЕЙСТВИЕ С ГЕРОЕМ
         if (x == Hero.getX() && y == Hero.getY()){
+            boom= new Audio("src//Sounds//boom.wav",0.7);
+            boom.sound();
+            boom.setVolume();
             GameLogic.hero.hit(damage);
             health = 0;
         }

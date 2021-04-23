@@ -78,6 +78,11 @@ public class WorldState extends GameState {
             } else {
                 isPLAY = false;
             }
+            if (GameLogic.mouseX >= 648 && GameLogic.mouseX <= 799 && GameLogic.mouseY >= 0 && GameLogic.mouseY <= 151) {
+                GameLogic.gsm.setSettings(true);
+            }else{
+                GameLogic.gsm.setSettings(false);
+            }
         }
     }
 
@@ -95,6 +100,10 @@ public class WorldState extends GameState {
         if (GameLogic.mouseX >= 540 && GameLogic.mouseX <= 780 && GameLogic.mouseY >= 700 && GameLogic.mouseY <= GameLogic.HEIGHT) {
             g.setColor(new Color(255, 255, 255, 60));
             g.fillRect(540, 700, 240, 100);
+        }
+        if (GameLogic.mouseX >= 648 && GameLogic.mouseX <= 799 && GameLogic.mouseY >= 0 && GameLogic.mouseY <= 151) {
+            g.setColor(new Color(255, 255, 255, 60));
+            g.fillRect(648, 0, 152, 151);
         }
 
         g.setColor(Color.BLACK);

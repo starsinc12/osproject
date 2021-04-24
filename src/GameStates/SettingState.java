@@ -62,7 +62,6 @@ public class SettingState extends GameState{
         g.drawString("QUIT",330,475);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
         g.setColor(Color.BLACK);
-        double volumeforscreen=(GameLogic.volume+0.3)*0.7;
         int volumesettigs=(int)(GameLogic.volume*100);
         String volume=Integer.toString(volumesettigs);
         g.drawString("VOLUME: "+volume+"%",240,350);

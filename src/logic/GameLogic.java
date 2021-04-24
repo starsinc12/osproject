@@ -73,8 +73,8 @@ public class GameLogic extends JPanel implements Runnable{
         while(isRunning) {
             start = System.nanoTime();
             update();
-            draw();
             fon.setVolume(volume);
+            draw();
             drawToScreen();
             setCursor(gsm.getCursor());
             elapsed = System.nanoTime() - start;

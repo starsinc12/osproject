@@ -12,6 +12,8 @@ public class GameStateManager {
     private boolean isSettings;
     private boolean gameOver;
     private boolean iswin;
+    private boolean valueup;
+    private boolean valuedown;
     public boolean isPaused() {
         return paused;
     }
@@ -23,7 +25,6 @@ public class GameStateManager {
         iswin = w;
     }
     public void setSettings(boolean s){isSettings = s;}
-
 
     private PauseState pauseState;
     private GameOverState gameOverState;
@@ -57,6 +58,8 @@ public class GameStateManager {
         gameOver = false;
         isSettings= false;
         iswin=false;
+        valueup=false;
+
         pauseState = new PauseState(this);
         gameOverState = new GameOverState(this);
         winState = new WinState(this);
@@ -117,6 +120,16 @@ public class GameStateManager {
                     GameLogic.gsm.setState(GameStateManager.WORLD);
                     isSettings = false;
                 }
+                if(SettingState.valueup){
+                    if(GameLogic.volume<0.99){
+                    GameLogic.volume+=0.01;
+                    }
+                }
+                if(SettingState.valuedown){
+                    if(GameLogic.volume>0.01) {
+                        GameLogic.volume -= 0.01;
+                    }
+                    }
             }
 
         } else if (gameOver) {
@@ -144,7 +157,9 @@ public class GameStateManager {
             mouseX = GameLogic.mouseX;
             mouseY = GameLogic.mouseY;
         }
-        System.out.println(currentState);
+
+      //  System.out.println(Boolean.toString(SettingState.valuedown));
+        //System.out.println(Boolean.toString(SettingState.valueup));
     }
 
     private void setStateResumeGame() {

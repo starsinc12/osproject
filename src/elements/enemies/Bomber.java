@@ -106,7 +106,7 @@ public class Bomber extends Enemy {
 
         // ВЗАИМОДЕЙСТВИЕ С ГЕРОЕМ
         if (x == Hero.getX() && y == Hero.getY()){
-            boom= new Audio("src//Sounds//boom.wav",0.7);
+            boom= new Audio("src//Sounds//boom.wav",GameLogic.volume);
             boom.sound();
             boom.setVolume();
             GameLogic.hero.hit(damage);

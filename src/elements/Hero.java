@@ -144,7 +144,7 @@ public class Hero {
             if (attackTimer == 0) {
                 PlayState.bullets.add(new Bullet(false));
                 attackTimer = attackDelay;
-                vistrel = new Audio("src//Sounds//vistrel.wav",0.7);
+                vistrel = new Audio("src//Sounds//vistrel.wav",GameLogic.volume);
                 vistrel.sound();
                 vistrel.setVolume();
             }

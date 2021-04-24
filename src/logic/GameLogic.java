@@ -16,6 +16,7 @@ public class GameLogic extends JPanel implements Runnable{
     public static int WIDTH;
     public static int HEIGHT;
     public static Audio fon;
+    public static double volume=0.3;
 
     public static int mouseX;
     public static int mouseY;
@@ -65,7 +66,7 @@ public class GameLogic extends JPanel implements Runnable{
         long start;
         long elapsed;
         long wait;
-        fon = new Audio("src//Sounds//marsh.wav",0.5);
+        fon = new Audio("src//Sounds//marsh.wav",volume);
         fon.sound();
         fon.setVolume();
         fon.repeat();
@@ -73,6 +74,7 @@ public class GameLogic extends JPanel implements Runnable{
             start = System.nanoTime();
             update();
             draw();
+            fon.setVolume(volume);
             drawToScreen();
             setCursor(gsm.getCursor());
             elapsed = System.nanoTime() - start;

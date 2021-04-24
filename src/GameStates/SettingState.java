@@ -3,10 +3,13 @@ package GameStates;
 import logic.GameLogic;
 import managers.GameStateManager;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class SettingState extends GameState{
     public static boolean isQuit = false;
+    public static boolean valueup = false;
+    public static boolean valuedown = false;
     public SettingState(GameStateManager gsm) {
         super(gsm);
     }
@@ -23,6 +26,22 @@ public class SettingState extends GameState{
         } else {
             isQuit = false;
         }
+        if (GameLogic.mouseX >= 569 && GameLogic.mouseX <= 599 && GameLogic.mouseY >= 325 && GameLogic.mouseY <= 355) {
+            if(GameLogic.volume<0.99) {
+               valueup=true;
+                // GameLogic.volume += 0.1;
+            }
+        }else{
+            valueup=false;
+        }
+        if(GameLogic.mouseX >= 519 && GameLogic.mouseX <= 549 && GameLogic.mouseY >= 325 && GameLogic.mouseY <= 355) {
+            if(GameLogic.volume>0.01) {
+                valuedown=true;
+            }
+        }else{
+                valuedown=false;
+            }
+
     }
 
     @Override
@@ -36,11 +55,29 @@ public class SettingState extends GameState{
         g.fillRect(210,410,380,80);
 
         g.setFont(new Font("TimesRoman", Font.PLAIN, 50));
-        g.setColor(Color.BLACK);
-        g.drawString("GAME OVER",250,260);
 
+        g.drawString("GAME OVER",250,260);
+        g.setColor(Color.BLACK);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 60));
         g.drawString("QUIT",330,475);
+        g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
+        g.setColor(Color.BLACK);
+        double volumeforscreen=(GameLogic.volume+0.3)*0.7;
+        int volumesettigs=(int)(GameLogic.volume*100);
+        String volume=Integer.toString(volumesettigs);
+        g.drawString("VOLUME: "+volume+"%",240,350);
+        g.setColor(Color.GREEN);
+        g.fillRect(569,325,30,30);
+        g.setColor(Color.RED);
+        g.fillRect(519,325,30,30);
+        if(GameLogic.mouseX >= 569 && GameLogic.mouseX <= 599 && GameLogic.mouseY >= 325 && GameLogic.mouseY <= 355) {
+            g.setColor(Color.YELLOW);
+            g.fillRect(569,325,30,30);
+        }
+        if(GameLogic.mouseX >= 519 && GameLogic.mouseX <= 549 && GameLogic.mouseY >= 325 && GameLogic.mouseY <= 355) {
+            g.setColor(Color.YELLOW);
+            g.fillRect(519,325,30,30);
+        }
         if(GameLogic.mouseX >= 210 && GameLogic.mouseX <= 590 && GameLogic.mouseY >= 410 && GameLogic.mouseY <= 490) {
             g.setColor(new Color(255,255,255,60));
             g.fillRect(210,410,380,80);

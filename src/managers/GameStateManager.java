@@ -12,8 +12,7 @@ public class GameStateManager {
     private boolean isSettings;
     private boolean gameOver;
     private boolean iswin;
-    private boolean valueup;
-    private boolean valuedown;
+    private boolean isUpgrading;
     public boolean isPaused() {
         return paused;
     }
@@ -25,11 +24,15 @@ public class GameStateManager {
         iswin = w;
     }
     public void setSettings(boolean s){isSettings = s;}
+    public void setUpgrading(boolean u) {
+        isUpgrading = u;
+    }
 
     private PauseState pauseState;
     private GameOverState gameOverState;
     private WinState winState;
     private SettingState settingState;
+    private UpgradeState upgradeState;
 
     private GameState[] gameStates;
     public GameState[] getGameStates() {
@@ -58,12 +61,12 @@ public class GameStateManager {
         gameOver = false;
         isSettings= false;
         iswin=false;
-        valueup=false;
 
         pauseState = new PauseState(this);
         gameOverState = new GameOverState(this);
         winState = new WinState(this);
         settingState= new SettingState(this);
+        upgradeState = new UpgradeState(this);
         gameStates = new GameState[NUM_STATES];
 
         setState(WORLD);
@@ -111,7 +114,15 @@ public class GameStateManager {
                     paused = false;
                 }
             }
-        } else if (isSettings) {
+        } else if(isUpgrading){
+           upgradeState.update();
+            if(GameLogic.leftMouse){
+                if(upgradeState.isQuit) {
+                    GameLogic.gsm.setStateResumeGame();
+                    isUpgrading = false;
+                }
+            }
+        }  else if (isSettings) {
             settingState.update();
             if(GameLogic.leftMouse){
                 if(SettingState.isQuit){
@@ -157,9 +168,6 @@ public class GameStateManager {
             mouseX = GameLogic.mouseX;
             mouseY = GameLogic.mouseY;
         }
-
-      //  System.out.println(Boolean.toString(SettingState.valuedown));
-        //System.out.println(Boolean.toString(SettingState.valueup));
     }
 
     private void setStateResumeGame() {
@@ -170,6 +178,8 @@ public class GameStateManager {
     public void draw(Graphics2D g) {
         if(paused) {
             pauseState.draw(g);
+        } else if (isUpgrading) {
+            upgradeState.draw(g);
         } else if (isSettings) {
              settingState.draw(g);
         } else if (gameOver) {

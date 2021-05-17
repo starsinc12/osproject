@@ -45,6 +45,11 @@ public class Bomber extends Enemy {
         return 0;
     }
 
+    @Override
+    public void xpifDed() {
+
+    }
+
 
     private boolean collisionCheckRight() {
         if (x >= ((GameLogic.WIDTH / 20) * (enemyTileX + 1) - r) && !PlayState.background.getTiles()[enemyTileX + 1][enemyTileY].isWalkable()) {

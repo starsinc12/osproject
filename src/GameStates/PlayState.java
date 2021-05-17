@@ -113,6 +113,7 @@ public class PlayState extends GameState {
 
         if(enemies.size() == 0){
             isOpen = true;
+            GameLogic.gsm.setUpgrading(true);
         } else isOpen = false;
 
         if(currentRoomNumber == 7 && !hpBar.isHeroDead) {

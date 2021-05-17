@@ -34,8 +34,8 @@ public class Hero {
     public static int getY() {
         return y;
     }
-    public static int heroTileX;
-    public static int heroTileY;
+    private static int heroTileX;
+    private static int heroTileY;
 
     private int r;
     private double dx;
@@ -63,6 +63,7 @@ public class Hero {
         return damage;
     }
     private static int level;
+    private static int hxp;
     private static int gameLevel;
     private static int speed;
     private static int skillPoints;
@@ -82,6 +83,16 @@ public class Hero {
     private static int attackTimer;
     private static int attackDelay;
     private static int attackSpeed;
+
+    public static int getHxp() {
+        return hxp;
+    }
+
+    public static void setHxp(int hxp) {
+        Hero.hxp = hxp;
+    }
+
+
 
     Image imgTank = null;
     Image imgPushka = null;
@@ -106,7 +117,7 @@ public class Hero {
 
         level = 1;
         gameLevel = 1;
-
+        hxp =0;
 
         attackTimer = 15;
         attackSpeed = 90;
@@ -138,9 +149,6 @@ public class Hero {
         // ОТВЯЗАТЬ ОТ ФПС
         heroTileX = x / (GameLogic.WIDTH / 20);
         heroTileY =  y / (GameLogic.WIDTH / 20);
-
-        PlayState.background.setHeroTile(heroTileX, heroTileY);
-
         if (!(up || down || right || left)) {
             //if(attackTimer < 0) attackTimer = 0;
             isAttack = true;
@@ -182,6 +190,11 @@ public class Hero {
         x += dx;
         dx = 0;
         dy = 0;
+        System.out.println(hxp);
+        if(hxp>=100){
+            level++;
+            hxp-=100;
+        }
     }
 
     private boolean collisionCheckRight() {
@@ -209,6 +222,7 @@ public class Hero {
     }
 
     public void draw(Graphics2D g) {
+
         AffineTransform orig1;
         orig1 = g.getTransform();
         AffineTransform newtransX1 = (AffineTransform) orig1.clone();
@@ -236,6 +250,15 @@ public class Hero {
         g.drawImage(imgPushka,(int) x - 24, (int) y - 42, null);
         g.setTransform(orig2);
         g.setStroke(new BasicStroke(5));
+
+        /*g.setColor(Color.white);
+        g.fillOval((int) (x - r), (int) (y - r),2 * r, 2 * r);
+        g.setStroke(new BasicStroke(3));
+        g.setColor(Color.white.darker());
+        g.drawOval((int) (x - r), (int) (y - r),2 * r, 2 * r);
+        g.setStroke(new BasicStroke(1));*/
+
+
     }
 
     public void reset() {

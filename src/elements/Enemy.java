@@ -36,4 +36,5 @@ public abstract class Enemy {
         return y;
     }
     public abstract int getR();
+    public abstract void xpifDed();
 }

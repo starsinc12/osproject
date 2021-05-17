@@ -24,6 +24,8 @@ public class InventoryState extends GameState {
 
     private Image cursorImg;
     private Image backImg;
+    private Image pushkaimg;
+    private Image tankimg;
     public static boolean isWORLD = false;
     public static boolean isINVENTORY = false;
     public static boolean isTALENTS = false;
@@ -35,6 +37,7 @@ public class InventoryState extends GameState {
         try {
             backImg = ImageIO.read(new File("src\\images\\backs\\inventory.png"));
             cursorImg = ImageIO.read(new File("src\\images\\menuCursor.png"));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -74,6 +77,20 @@ public class InventoryState extends GameState {
     public void draw(Graphics2D g) {
         backImg = backImg.getScaledInstance(GameLogic.WIDTH,GameLogic.HEIGHT, Image.SCALE_DEFAULT);
         g.drawImage(backImg, 0,0, GameLogic.WIDTH, GameLogic.HEIGHT,null);
+        try {
+            tankimg=ImageIO.read(new File("src\\images\\tankbezpushki.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        tankimg =  tankimg.getScaledInstance( 184,336,Image.SCALE_DEFAULT);
+        g.drawImage(tankimg,580,30,184,336,null);
+        try {
+            pushkaimg=ImageIO.read(new File("src\\images\\pushka.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        pushkaimg =  pushkaimg.getScaledInstance( 184,328,Image.SCALE_DEFAULT);
+        g.drawImage(pushkaimg,580,30,184,328,null);
 
         if (GameLogic.mouseX >= 280 && GameLogic.mouseX <= 520 && GameLogic.mouseY >= 700 && GameLogic.mouseY <= GameLogic.HEIGHT) {
             g.setColor(new Color(255, 255, 255, 60));

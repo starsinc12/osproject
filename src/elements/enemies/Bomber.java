@@ -70,9 +70,6 @@ public class Bomber extends Enemy {
         } else return false;
     }
 
-
-
-
     @Override
     public void update() {
 
@@ -122,11 +119,6 @@ public class Bomber extends Enemy {
         }
     }
 
-
-
-
-
-
     @Override
     public void draw(Graphics2D g) {
         g.setColor(Color.BLACK);
@@ -142,6 +134,4 @@ public class Bomber extends Enemy {
         g.drawOval(x - r / 4, y - r / 4,   r / 2,  r / 2);
         g.setStroke(new BasicStroke(2));
     }
-
-
 }

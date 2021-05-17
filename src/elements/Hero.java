@@ -1,7 +1,6 @@
 package elements;
 
 import GameStates.PlayState;
-import backgrounds.PlayStateBack;
 import inventory.typesOfEquipment.Armor;
 import inventory.typesOfEquipment.Ring;
 import inventory.typesOfEquipment.Shoes;

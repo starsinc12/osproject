@@ -18,8 +18,6 @@ public class Fly extends Enemy {
     }
 
 
-
-
     public Fly(int level, int tilex, int tiley) {
         this.level = level;
         x = tilex;
@@ -27,16 +25,27 @@ public class Fly extends Enemy {
         speed = 3;
         r = 7;
         health = 20 + (level - 1) * 4;
-        expForKill = 100 + (level - 1) * 4;
+        expForKill = 15 + (level - 1) * 4;
         damage = 200;
-
         attackTimer = 0;
-        attackSpeed = 90;
+        attackSpeed = 120;
         attackDelay = 3600 / (attackSpeed + 60);
-        if(attackDelay < 6) attackDelay = 6;
-
+        if (attackDelay < 6) attackDelay = 6;
     }
 
+    @Override
+    public void hit(double heroDamage) {
+        health -= heroDamage;
+    }
+
+    @Override
+    public boolean isDead() {
+        return health <= 0;
+    }
+
+    public void xpifDed() {
+        Hero.setHxp(Hero.getHxp() + expForKill);
+    }
 
     @Override
     public void update() {
@@ -44,7 +53,7 @@ public class Fly extends Enemy {
         distX = Hero.getX() - x;
         distY = Hero.getY() - y;
 
-        if(distX == 0 && distY == 0) {
+        if (distX == 0 && distY == 0) {
             dist = 1;
         } else {
             dist = Math.sqrt(distX * distX + distY * distY);
@@ -53,15 +62,15 @@ public class Fly extends Enemy {
         dx = distX / dist * speed;
         dy = distY / dist * speed;
 
-        if(x == Hero.getX() || y == Hero.getY()){
-            dy = dy / Math.sqrt(2); // * Math.cos(Math.PI/4)
+        if (x == Hero.getX() || y == Hero.getY()) {
+            dy = dy / Math.sqrt(2);
             dx = dx / Math.sqrt(2);
         }
 
         x += dx;
         y += dy;
 
-        if (x == Hero.getX() && y == Hero.getY()){
+        if ((x >= Hero.getX() - 23 && x <= Hero.getX() + 23) && (y >= Hero.getY() - 36 && y <= Hero.getY() + 31)) {
             if (attackTimer == 0) {
                 GameLogic.hero.hit(damage);
                 attackTimer = attackDelay;
@@ -75,40 +84,26 @@ public class Fly extends Enemy {
     @Override
     public void draw(Graphics2D g) {
         g.setColor(Color.GRAY);
-        g.fillOval(x - r, y - r , 2 * r, 2 * r);
+        g.fillOval(x - r, y - r, 2 * r, 2 * r);
         g.setStroke(new BasicStroke(3));
         g.setColor(Color.BLACK);
-        g.drawOval(x - r, y - r , 2 * r, 2 * r);
+        g.drawOval(x - r, y - r, 2 * r, 2 * r);
         g.setStroke(new BasicStroke(2));
 
-        if(dx > 0 && dy > 0 || dx < 0 && dy < 0) {
-            g.fillOval(x - 2 * r, y + 3 * r / 2 - 2, r,  r); // левое
-            g.fillOval(x + r, y - 3 * r / 2, r,  r); // правое
-        } else if(dx > 0 && dy < 0 || dx < 0 && dy > 0) {
-            g.fillOval(x - 2 * r, y - 2 * r, r,  r); // левое
-            g.fillOval(x + r, y + r / 2, r,  r); // правое
-        } else if (dx == 0){
-            g.fillOval(x - 2 * r, y - r + r / 2, r,  r); // левое
-            g.fillOval(x + r, y - r + r / 2, r,  r); // правое
-        } else if (dy == 0){
-            g.fillOval(x - r/2, y - 2 * r, r, r);
-            g.fillOval(x- r/2, y + r, r, r);
+        if (dx > 0 && dy > 0 || dx < 0 && dy < 0) {
+            g.fillOval(x - 2 * r, y + 3 * r / 2 - 2, r, r); // левое
+            g.fillOval(x + r, y - 3 * r / 2, r, r); // правое
+        } else if (dx > 0 && dy < 0 || dx < 0 && dy > 0) {
+            g.fillOval(x - 2 * r, y - 2 * r, r, r); // левое
+            g.fillOval(x + r, y + r / 2, r, r); // правое
+        } else if (dx == 0) {
+            g.fillOval(x - 2 * r, y - r + r / 2, r, r); // левое
+            g.fillOval(x + r, y - r + r / 2, r, r); // правое
+        } else if (dy == 0) {
+            g.fillOval(x - r / 2, y - 2 * r, r, r);
+            g.fillOval(x - r / 2, y + r, r, r);
         }
 
     }
-    @Override
-    public void hit(double heroDamage) {
-        health -= heroDamage;
-    }
-
-    @Override
-    public boolean isDead() {
-        return health <= 0;
-    }
-    public void xpifDed(){
-        Hero.setHxp(Hero.getHxp()+expForKill);
-    }
-
-
 
 }

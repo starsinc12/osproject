@@ -24,6 +24,7 @@ public class PauseState extends GameState {
     public void update() {
         if (GameLogic.mouseX >= 210 && GameLogic.mouseX <= 590 && GameLogic.mouseY >= 310 && GameLogic.mouseY <= 390) {
             isResume = true;
+
         } else {
             isResume = false;
         }

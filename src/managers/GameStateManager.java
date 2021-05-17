@@ -56,6 +56,10 @@ public class GameStateManager {
     public static final int WORLD = 2;
     public static final int PLAY = 3;
 
+    public Cursor getCursor() {
+        return gameStates[currentState].getCursor();
+    }
+
     public GameStateManager() {
         paused = false;
         gameOver = false;
@@ -99,15 +103,26 @@ public class GameStateManager {
         gameStates[i] = null;
     }
 
+    private void setStateResumeGame() {
+        previousState = currentState;
+        currentState = GameStateManager.PLAY;
+    }
+
     public void update() {
         if(paused) {
             pauseState.update();
             if(GameLogic.leftMouse){
+
                 if(PauseState.isResume) {
                     GameLogic.gsm.setStateResumeGame();
                     paused = false;
                 }
                 if (PauseState.isQuit) {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     Hero.setX(GameLogic.WIDTH / 2);
                     Hero.setY(GameLogic.HEIGHT - 20);
                     GameLogic.gsm.setState(GameStateManager.WORLD);
@@ -170,11 +185,6 @@ public class GameStateManager {
         }
     }
 
-    private void setStateResumeGame() {
-        previousState = currentState;
-        currentState = GameStateManager.PLAY;
-    }
-
     public void draw(Graphics2D g) {
         if(paused) {
             pauseState.draw(g);
@@ -189,9 +199,5 @@ public class GameStateManager {
         } else if (gameStates[currentState] != null) {
             gameStates[currentState].draw(g);
         }
-    }
-
-    public Cursor getCursor() {
-        return gameStates[currentState].getCursor();
     }
 }

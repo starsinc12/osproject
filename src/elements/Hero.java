@@ -1,6 +1,7 @@
 package elements;
 
 import GameStates.PlayState;
+import backgrounds.PlayStateBack;
 import inventory.typesOfEquipment.Armor;
 import inventory.typesOfEquipment.Ring;
 import inventory.typesOfEquipment.Shoes;
@@ -34,8 +35,8 @@ public class Hero {
     public static int getY() {
         return y;
     }
-    private static int heroTileX;
-    private static int heroTileY;
+    public static int heroTileX;
+    public static int heroTileY;
 
     private int r;
     private double dx;
@@ -138,6 +139,9 @@ public class Hero {
         // ОТВЯЗАТЬ ОТ ФПС
         heroTileX = x / (GameLogic.WIDTH / 20);
         heroTileY =  y / (GameLogic.WIDTH / 20);
+
+        PlayState.background.setHeroTile(heroTileX, heroTileY);
+
         if (!(up || down || right || left)) {
             //if(attackTimer < 0) attackTimer = 0;
             isAttack = true;
@@ -206,7 +210,6 @@ public class Hero {
     }
 
     public void draw(Graphics2D g) {
-
         AffineTransform orig1;
         orig1 = g.getTransform();
         AffineTransform newtransX1 = (AffineTransform) orig1.clone();
@@ -234,15 +237,6 @@ public class Hero {
         g.drawImage(imgPushka,(int) x - 24, (int) y - 42, null);
         g.setTransform(orig2);
         g.setStroke(new BasicStroke(5));
-
-        /*g.setColor(Color.white);
-        g.fillOval((int) (x - r), (int) (y - r),2 * r, 2 * r);
-        g.setStroke(new BasicStroke(3));
-        g.setColor(Color.white.darker());
-        g.drawOval((int) (x - r), (int) (y - r),2 * r, 2 * r);
-        g.setStroke(new BasicStroke(1));*/
-
-
     }
 
     public void reset() {

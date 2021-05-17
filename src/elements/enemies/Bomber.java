@@ -16,16 +16,18 @@ public class Bomber extends Enemy {
     private boolean left;
     private boolean right;
     public static Audio boom;
+    double angle;
 
     public Bomber(int level, int tilex, int tiley) {
         this.level = level;
         x = tilex;
         y = tiley;
         speed = 3;
-        r = 10;
+        r = 20;
         health = 20 + (level - 1) * 4;
         expForKill = 10 + (level - 1) * 4;
         damage = 400;
+        angle = 0;
     }
 
     @Override
@@ -51,7 +53,7 @@ public class Bomber extends Enemy {
     }
 
     private boolean collisionCheckLeft(){
-        if (x <= ((GameLogic.WIDTH / 20) * enemyTileX + r) && !PlayState.background.getTiles()[enemyTileY - 1][enemyTileY].isWalkable()) {
+        if (x <= ((GameLogic.WIDTH / 20) * enemyTileX + r) && !PlayState.background.getTiles()[enemyTileX - 1][enemyTileY].isWalkable()) {
             return true;
         } else return false;
     }
@@ -85,24 +87,30 @@ public class Bomber extends Enemy {
         } else {
             dist = Math.sqrt(distX * distX + distY * distY);
         }
+
+        angle = Math.acos(distY / dist);
+
         dx = distX / dist * speed;
         dy = distY / dist * speed;
+
         if(x == Hero.getX() || y == Hero.getY()){
             dy = dy / Math.sqrt(2);
             dx = dx / Math.sqrt(2);
         }
-        if(collisionCheckLeft() || collisionCheckRight()) {
+
+        if(collisionCheckRight() || collisionCheckLeft()) {
             dx = 0;
+            if(distY > 0) dy = speed;
+            else dy = -speed;
+
         } else if(collisionCheckDown() || collisionCheckUp()) {
             dy = 0;
+            if(distX > 0) dx = speed;
+            else dx = -speed;
         }
+
         x += dx;
         y += dy;
-
-
-
-
-
 
         // ВЗАИМОДЕЙСТВИЕ С ГЕРОЕМ
         if (x == Hero.getX() && y == Hero.getY()){
@@ -122,16 +130,16 @@ public class Bomber extends Enemy {
     @Override
     public void draw(Graphics2D g) {
         g.setColor(Color.BLACK);
-        g.fillOval(x - r, y - r , 2 * r, 2 * r);
+        g.fillOval(x - r / 2, y - r / 2, r, r);
         g.setStroke(new BasicStroke(3));
         g.setColor(Color.BLACK);
-        g.drawOval(x - r, y - r , 2 * r, 2 * r);
+        g.drawOval(x - r / 2, y - r / 2, r, r);
         g.setStroke(new BasicStroke(2));
         g.setColor(Color.RED);
-        g.fillOval(x - r / 2, y - r / 2 ,  r,  r);
+        g.fillOval(x - r / 4, y - r / 4,  r / 2 ,  r / 2);
         g.setStroke(new BasicStroke(3));
         g.setColor(Color.BLACK);
-        g.drawOval(x - r / 2, y - r / 2 ,   r,  r);
+        g.drawOval(x - r / 4, y - r / 4,   r / 2,  r / 2);
         g.setStroke(new BasicStroke(2));
     }
 

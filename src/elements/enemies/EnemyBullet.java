@@ -1,6 +1,7 @@
-package elements;
+package elements.enemies;
 
 import GameStates.PlayState;
+import elements.Bullet;
 import logic.GameLogic;
 import managers.GameStateManager;
 
@@ -34,19 +35,24 @@ public class EnemyBullet {
     private Color color;
     private double damage;
 
+    public double getDamage() {
+        return damage;
+    }
 
-    private boolean isReflecting;
+    public void setDamage(double damage) {
+        this.damage = damage;
+    }
 
     public EnemyBullet(double a, int x, int y, int damage) {
-
         angle = a;
         this.x = x;
         this.y = y;
         r = 5;
         speed = 12;
         this.damage = damage;
-        color = Color.RED;
+        color = Color.BLACK;
     }
+
 
     public void update() {
         eBulletTileX = x / (GameLogic.WIDTH / 20);
@@ -71,28 +77,24 @@ public class EnemyBullet {
 
     private boolean collisionCheckRight() {
         if (x >= ((GameLogic.WIDTH / 20) * (eBulletTileX + 1)) && !PlayState.background.getTiles()[eBulletTileX + 1][eBulletTileY].isShootable()) {
-            PlayState.background.getTiles()[eBulletTileX + 1][eBulletTileY].hasShooted();
             return true;
         } else return false;
     }
 
     private boolean collisionCheckLeft(){
         if (x <= ((GameLogic.WIDTH / 20) * eBulletTileX) && !PlayState.background.getTiles()[eBulletTileX - 1][eBulletTileY].isShootable()) {
-            PlayState.background.getTiles()[eBulletTileX - 1][eBulletTileY].hasShooted();
             return true;
         } else return false;
     }
 
     private boolean collisionCheckDown() {
         if (y >= ((GameLogic.WIDTH / 20) * (eBulletTileY + 1)) && !PlayState.background.getTiles()[eBulletTileX][eBulletTileY + 1].isShootable()) {
-            PlayState.background.getTiles()[eBulletTileX][eBulletTileY + 1].hasShooted();
             return true;
         } else return false;
     }
 
     private boolean collisionCheckUp(){
         if (y <= ((GameLogic.HEIGHT / 20) * eBulletTileY) && !PlayState.background.getTiles()[eBulletTileX][eBulletTileY - 1].isShootable()) {
-            PlayState.background.getTiles()[eBulletTileX][eBulletTileY - 1].hasShooted();
             return true;
         } else return false;
     }

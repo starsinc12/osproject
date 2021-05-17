@@ -6,6 +6,7 @@ import elements.Enemy;
 import backgrounds.PlayStateBack;
 import elements.HPBar;
 import elements.Hero;
+import elements.enemies.EnemyBullet;
 import logic.GameLogic;
 import managers.GameStateManager;
 
@@ -24,6 +25,7 @@ public class PlayState extends GameState {
 
     public static PlayStateBack background;
     public static ArrayList<Bullet> bullets;
+    public static ArrayList<EnemyBullet> ebullets;
     public static ArrayList<Enemy> enemies;
     public static HPBar hpBar;
     public static Integer enemiesKilled;
@@ -53,8 +55,6 @@ public class PlayState extends GameState {
                 }
             }
         }
-        System.out.println(tiles[x+1][y].isHere());
-        System.out.println(tiles[x][y].isHere());
     }
 
     public PlayState(GameStateManager gameStateManager) {
@@ -68,6 +68,7 @@ public class PlayState extends GameState {
     public void init() {
         background = new PlayStateBack();
         bullets = new ArrayList<Bullet>();
+        ebullets = new ArrayList<EnemyBullet>();
         enemies = new ArrayList<Enemy>();
         hpBar = new HPBar();
         GameLogic.hero.reset();
@@ -113,8 +114,18 @@ public class PlayState extends GameState {
             }
         }
 
+        for (int i = 0; i < ebullets.size(); i++) {
+            ebullets.get(i).update();
+            boolean k = collisionBulletHero(i);
+            if (!k && ebullets.get(i).remove()) {
+                ebullets.remove(i);
+                --i;
+            }
+        }
+
         for (int i = 0; i < enemies.size(); i++) {
             enemies.get(i).update();
+
             collisionArrowEnemy(i);
             if (enemies.get(i).isDead()) {
                 enemies.get(i).xpifDed();
@@ -124,14 +135,26 @@ public class PlayState extends GameState {
             }
         }
 
-
         hpBar.update();
-
 
         if (currentRoomNumber == 7 && !hpBar.isHeroDead) {
             GameLogic.gsm.setWin(true);
         }
 
+    }
+
+    private boolean collisionBulletHero(int a) {
+        boolean t = false;
+        for (int i = 0; i < ebullets.size(); i++) {
+            double dist = Math.sqrt(Math.pow(Hero.getX() - ebullets.get(i).getX(), 2) + Math.pow(Hero.getY() - ebullets.get(i).getY(), 2));
+            if (dist <= 10 + ebullets.get(i).getR()) {
+                GameLogic.hero.hit(ebullets.get(a).getDamage());
+                ebullets.remove(i);
+                --i;
+                t = true;
+            }
+        }
+        return t;
     }
 
     // проверка столновений выстрелов и врагов
@@ -156,6 +179,9 @@ public class PlayState extends GameState {
         for (Bullet bullet : bullets) {
             bullet.draw(g);
         }
+        for (EnemyBullet eBullet : ebullets) {
+            eBullet.draw(g);
+        }
         for (Enemy enemy : enemies) {
             enemy.draw(g);
         }
@@ -173,10 +199,5 @@ public class PlayState extends GameState {
             isOpen = true;
 
         } else isOpen = false;
-
-        //g.setStroke(new BasicStroke(3));
-        // g.drawLine(Hero.getX(), Hero.getY(), enemies.get(1).getX(), enemies.get(1).getY());
-        //g.drawLine(Hero.getX(), Hero.getY(), enemies.get(1).getX(), Hero.getY());
-        //g.drawLine(enemies.get(1).getX(), Hero.getY(), enemies.get(1).getX(), enemies.get(1).getY());
     }
 }

@@ -4,6 +4,7 @@ import GameStates.PlayState;
 import GameStates.WorldState;
 import elements.enemies.Bomber;
 import elements.enemies.Fly;
+import elements.enemies.Tower;
 import logic.GameLogic;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -79,6 +80,10 @@ public class PlayStateBack {
                     if (color.getBlue() == 1) {
                         tiles[j][i] = new PlayTile(PlayTile.TYPE.GRASS);
                         PlayState.enemies.add(new Bomber(1,(j * GameLogic.WIDTH / 20) + 20,(i * GameLogic.HEIGHT / 20) + 20));
+                    }
+                    if (color.getBlue() == 2) {
+                        tiles[j][i] = new PlayTile(PlayTile.TYPE.GRASS);
+                        PlayState.enemies.add(new Tower(1,(j * GameLogic.WIDTH / 20) + 20,(i * GameLogic.HEIGHT / 20) + 20));
                     }
                 }
             }

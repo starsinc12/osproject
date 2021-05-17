@@ -14,7 +14,7 @@ public abstract class Enemy {
     protected double speed;
     protected double health;
     protected int level;
-    protected double damage;
+    protected int damage;
     protected int expForKill;
     public int getExpForKill() {
         return expForKill;

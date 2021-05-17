@@ -146,6 +146,7 @@ public class Hero {
     Image imgTank = null;
     static Image imgPushka = new ImageIcon("src\\images\\pushka1.png").getImage();
 
+
     public Image getImgPushka() {
         return imgPushka;
     }

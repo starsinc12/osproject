@@ -28,7 +28,7 @@ public class SettingState extends GameState{
         }
         if (GameLogic.mouseX >= 569 && GameLogic.mouseX <= 599 && GameLogic.mouseY >= 325 && GameLogic.mouseY <= 355) {
             if(GameLogic.volume<0.99) {
-               valueup=true;
+                valueup=true;
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
@@ -48,8 +48,8 @@ public class SettingState extends GameState{
                 }
             }
         }else{
-                valuedown=false;
-            }
+            valuedown=false;
+        }
 
     }
 

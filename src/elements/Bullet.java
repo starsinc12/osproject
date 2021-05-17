@@ -39,6 +39,7 @@ public class Bullet {
 
     private boolean isReflecting;
 
+
     public Bullet(boolean isR) {
 
         double angle = Math.atan((GameLogic.mouseY - Hero.getY()) / ((GameLogic.mouseX == Hero.getX() ) ? 1 : (GameLogic.mouseX - Hero.getX())));

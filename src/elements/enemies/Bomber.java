@@ -16,18 +16,16 @@ public class Bomber extends Enemy {
     private boolean left;
     private boolean right;
     public static Audio boom;
-    double angle;
 
     public Bomber(int level, int tilex, int tiley) {
         this.level = level;
         x = tilex;
         y = tiley;
         speed = 3;
-        r = 20;
+        r = 10;
         health = 20 + (level - 1) * 4;
         expForKill = 10 + (level - 1) * 4;
         damage = 400;
-        angle = 0;
     }
 
     @Override
@@ -47,7 +45,7 @@ public class Bomber extends Enemy {
 
     @Override
     public void xpifDed() {
-
+        Hero.setHxp(Hero.getHxp()+expForKill);
     }
 
 
@@ -75,6 +73,9 @@ public class Bomber extends Enemy {
         } else return false;
     }
 
+
+
+
     @Override
     public void update() {
 
@@ -90,7 +91,7 @@ public class Bomber extends Enemy {
             dist = Math.sqrt(distX * distX + distY * distY);
         }
 
-        angle = Math.acos(distY / dist);
+
 
         dx = distX / dist * speed;
         dy = distY / dist * speed;
@@ -124,19 +125,26 @@ public class Bomber extends Enemy {
         }
     }
 
+
+
+
+
+
     @Override
     public void draw(Graphics2D g) {
         g.setColor(Color.BLACK);
-        g.fillOval(x - r / 2, y - r / 2, r, r);
+        g.fillOval(x - r, y - r , 2 * r, 2 * r);
         g.setStroke(new BasicStroke(3));
         g.setColor(Color.BLACK);
-        g.drawOval(x - r / 2, y - r / 2, r, r);
+        g.drawOval(x - r, y - r , 2 * r, 2 * r);
         g.setStroke(new BasicStroke(2));
         g.setColor(Color.RED);
-        g.fillOval(x - r / 4, y - r / 4,  r / 2 ,  r / 2);
+        g.fillOval(x - r / 2, y - r / 2 ,  r,  r);
         g.setStroke(new BasicStroke(3));
         g.setColor(Color.BLACK);
-        g.drawOval(x - r / 4, y - r / 4,   r / 2,  r / 2);
+        g.drawOval(x - r / 2, y - r / 2 ,   r,  r);
         g.setStroke(new BasicStroke(2));
     }
+
+
 }

@@ -16,7 +16,8 @@ import java.util.ArrayList;
 import Sounds.Audio;
 
 public class Hero {
-    public static Audio vistrel;
+    public static Audio soundshoot;
+    public static Audio soundlvlup;
     private static int x;
     private static int y;
 
@@ -57,8 +58,26 @@ public class Hero {
         return maxHealth;
     }
 
+    public static double getProtection() {
+        return protection;
+    }
+
+    public static void setProtection(double protection) {
+        Hero.protection = protection;
+    }
+
     private static double protection;
     private static double damage;
+
+    public static int getDmgincres() {
+        return dmgincres;
+    }
+
+    public static void setDmgincres(int dmgincres) {
+        Hero.dmgincres = dmgincres;
+    }
+
+    private static int dmgincres=1;
     public static double getDamage() {
         return damage;
     }
@@ -66,6 +85,15 @@ public class Hero {
     private static int hxp;
     private static int gameLevel;
     private static int speed;
+
+    public static int getSkillPoints() {
+        return skillPoints;
+    }
+
+    public static void setSkillPoints(int skillPoints) {
+        Hero.skillPoints = skillPoints;
+    }
+
     private static int skillPoints;
 
     private ArrayList<Skill> skillsList;
@@ -111,7 +139,7 @@ public class Hero {
         isAttack = false;
 
         protection = 2;
-        damage = 10;
+        damage = 10+dmgincres;
         health = 1000;
         maxHealth = health;
 
@@ -142,7 +170,7 @@ public class Hero {
     }
 
     public void hit(double enemyDamage){
-        health -= enemyDamage;
+        health -= enemyDamage*protection/(protection+5);
     }
 
     public void update() {
@@ -155,9 +183,9 @@ public class Hero {
             if (attackTimer == 0) {
                 PlayState.bullets.add(new Bullet(false));
                 attackTimer = attackDelay;
-                vistrel = new Audio("src//Sounds//vistrel.wav",GameLogic.volume);
-                vistrel.sound();
-                vistrel.setVolume();
+                soundshoot = new Audio("src//Sounds//vistrel.wav",GameLogic.volume);
+                soundshoot.sound();
+                soundshoot.setVolume();
             }
             --attackTimer;
         } else {
@@ -190,10 +218,14 @@ public class Hero {
         x += dx;
         dx = 0;
         dy = 0;
-        System.out.println(hxp);
+        System.out.println(protection);
         if(hxp>=100){
             level++;
+            skillPoints++;
             hxp-=100;
+            soundlvlup = new Audio("src//Sounds//levelup.wav",GameLogic.volume);
+            soundlvlup.sound();
+            soundlvlup.setVolume();
         }
     }
 

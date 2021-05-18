@@ -6,25 +6,22 @@ public class PlayTile {
 
     private BufferedImage image;
 
-    // ДЛЯ ПОИСКА ПУТИ
-    public int tileX;
-    public int tileY;
-    public boolean isHere;
-
-
     public enum TYPE {
         GRASS, // трава, можно по ней ходить и через неё стрелять
         WALL, // стена, через неё нельзя ни ходить, ни стрелять
         BOX, // коробка, через неё нельзя ходить, разрушается при попадании снаряда и становится травой
         SOFTWALL,
         SPIKES,
-        // декор укрытие - придумать
+        // декор / укрытие - придумать
         WALL2, // декоративная клетка. потом придумать что там будет
         WALL3, // декоративная клетка. потом придумать что там будет
     }
 
     private TYPE type;
-
+    private TYPE left;
+    private TYPE right;
+    private TYPE up;
+    private TYPE down;
 
     public int hit = 0;
     private boolean walkable;
@@ -49,11 +46,8 @@ public class PlayTile {
         }
     }
 
-    public PlayTile(TYPE type, int x , int y) {
+    public PlayTile(TYPE type) {
         this.type = type;
-        tileX = x;
-        tileY = y;
-        isHere = false;
         if(this.type == TYPE.GRASS) {
             this.walkable = true;
             this.shootable = true;
@@ -69,4 +63,6 @@ public class PlayTile {
             this.hit = 2;
         }
     }
+
+
 }

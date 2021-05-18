@@ -1,7 +1,6 @@
 package backgrounds;
 
 import GameStates.PlayState;
-import elements.Hero;
 import elements.enemies.Bomber;
 import elements.enemies.Fly;
 import logic.GameLogic;
@@ -59,21 +58,21 @@ public class PlayStateBack {
             for (int j = 0; j < map.getHeight(null); j++) {
                 color = new Color(map.getRGB(j, i));
                 if (color.equals(Color.WHITE)) {
-                    tiles[j][i] = new PlayTile(PlayTile.TYPE.GRASS, j * GameLogic.WIDTH / 20, i * GameLogic.WIDTH / 20);
+                    tiles[j][i] = new PlayTile(PlayTile.TYPE.GRASS);
                 }
                 if (color.equals(Color.BLACK)) {
-                    tiles[j][i] = new PlayTile(PlayTile.TYPE.WALL, j * GameLogic.WIDTH / 20, i * GameLogic.WIDTH / 20);
+                    tiles[j][i] = new PlayTile(PlayTile.TYPE.WALL);
                 }
                 if (color.equals(new Color(223,113,38))) {
-                    tiles[j][i] = new PlayTile(PlayTile.TYPE.BOX, j * GameLogic.WIDTH / 20, i * GameLogic.WIDTH / 20);
+                    tiles[j][i] = new PlayTile(PlayTile.TYPE.BOX);
                 }
                 if(color.getRed() == 100 && color.getGreen() == 100) {
                     if (color.getBlue() == 0) {
-                        tiles[j][i] = new PlayTile(PlayTile.TYPE.GRASS, j * GameLogic.WIDTH / 20, i * GameLogic.WIDTH / 20);
+                        tiles[j][i] = new PlayTile(PlayTile.TYPE.GRASS);
                         PlayState.enemies.add(new Fly(1,(j * GameLogic.WIDTH / 20) + 20,(i * GameLogic.HEIGHT / 20) + 20));
                     }
                     if (color.getBlue() == 1) {
-                        tiles[j][i] = new PlayTile(PlayTile.TYPE.GRASS, j * GameLogic.WIDTH / 20, i * GameLogic.WIDTH / 20);
+                        tiles[j][i] = new PlayTile(PlayTile.TYPE.GRASS);
                         PlayState.enemies.add(new Bomber(1,(j * GameLogic.WIDTH / 20) + 20,(i * GameLogic.HEIGHT / 20) + 20));
                     }
                 }
@@ -95,16 +94,5 @@ public class PlayStateBack {
 
     public PlayTile[][] getTiles() {
         return tiles;
-    }
-
-    public void setHeroTile(int x, int y) {
-        tiles[x][y].isHere = true;
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < 20; j++) {
-                if(i != x || j != y) {
-                    tiles[i][j].isHere = false;
-                }
-            }
-        }
     }
 }

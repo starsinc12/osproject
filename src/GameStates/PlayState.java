@@ -111,10 +111,7 @@ public class PlayState extends GameState {
 
         hpBar.update();
 
-        if(enemies.size() == 0){
-            isOpen = true;
-            GameLogic.gsm.setUpgrading(true);
-        } else isOpen = false;
+
 
         if(currentRoomNumber == 7 && !hpBar.isHeroDead) {
             GameLogic.gsm.setWin(true);
@@ -158,9 +155,14 @@ public class PlayState extends GameState {
         if(hpBar.isHeroDead) {
             GameLogic.gsm.setGameOver(true);
         }
+        if(enemies.size() == 0){
+            isOpen = true;
+            if(Hero.getSkillPoints()>0)
+                GameLogic.gsm.setUpgrading(true);
+        } else isOpen = false;
 
         //g.setStroke(new BasicStroke(3));
-       // g.drawLine(Hero.getX(), Hero.getY(), enemies.get(1).getX(), enemies.get(1).getY());
+        // g.drawLine(Hero.getX(), Hero.getY(), enemies.get(1).getX(), enemies.get(1).getY());
         //g.drawLine(Hero.getX(), Hero.getY(), enemies.get(1).getX(), Hero.getY());
         //g.drawLine(enemies.get(1).getX(), Hero.getY(), enemies.get(1).getX(), enemies.get(1).getY());
     }

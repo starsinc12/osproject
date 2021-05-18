@@ -115,7 +115,7 @@ public class GameStateManager {
                 }
             }
         } else if(isUpgrading){
-           upgradeState.update();
+            upgradeState.update();
             if(GameLogic.leftMouse){
                 if(upgradeState.isQuit) {
                     GameLogic.gsm.setStateResumeGame();
@@ -133,14 +133,14 @@ public class GameStateManager {
                 }
                 if(SettingState.valueup){
                     if(GameLogic.volume<0.99){
-                    GameLogic.volume+=0.01;
+                        GameLogic.volume+=0.01;
                     }
                 }
                 if(SettingState.valuedown){
                     if(GameLogic.volume>0.01) {
                         GameLogic.volume -= 0.01;
                     }
-                    }
+                }
             }
 
         } else if (gameOver) {
@@ -181,7 +181,7 @@ public class GameStateManager {
         } else if (isUpgrading) {
             upgradeState.draw(g);
         } else if (isSettings) {
-             settingState.draw(g);
+            settingState.draw(g);
         } else if (gameOver) {
             gameOverState.draw(g);
         } else if (iswin) {

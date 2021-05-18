@@ -7,7 +7,6 @@ import logic.GameLogic;
 import java.awt.*;
 
 public class Fly extends Enemy {
-
     private int attackTimer;
     private int attackSpeed;
     private int attackDelay;
@@ -30,7 +29,7 @@ public class Fly extends Enemy {
         speed = 3;
         r = 7;
         health = 20 + (level - 1) * 4;
-        expForKill = 10 + (level - 1) * 4;
+        expForKill = 100 + (level - 1) * 4;
         damage = 200;
 
         attackTimer = 0;
@@ -107,6 +106,9 @@ public class Fly extends Enemy {
     @Override
     public boolean isDead() {
         return health <= 0;
+    }
+    public void xpifDed(){
+        Hero.setHxp(Hero.getHxp()+expForKill);
     }
 
 

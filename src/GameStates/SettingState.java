@@ -29,7 +29,11 @@ public class SettingState extends GameState{
         if (GameLogic.mouseX >= 569 && GameLogic.mouseX <= 599 && GameLogic.mouseY >= 325 && GameLogic.mouseY <= 355) {
             if(GameLogic.volume<0.99) {
                valueup=true;
-                // GameLogic.volume += 0.1;
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }else{
             valueup=false;
@@ -37,6 +41,11 @@ public class SettingState extends GameState{
         if(GameLogic.mouseX >= 519 && GameLogic.mouseX <= 549 && GameLogic.mouseY >= 325 && GameLogic.mouseY <= 355) {
             if(GameLogic.volume>0.01) {
                 valuedown=true;
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }else{
                 valuedown=false;

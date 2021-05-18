@@ -17,10 +17,8 @@ public class Fly extends Enemy {
         return r;
     }
 
-    @Override
-    public void xpifDed() {
 
-    }
+
 
     public Fly(int level, int tilex, int tiley) {
         this.level = level;

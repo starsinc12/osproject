@@ -21,6 +21,7 @@ public class PlayStateBack {
     private Image wall;
     private Image grass;
     private Image box;
+    private Image star;
     BufferedImage bufferedImage = new BufferedImage(GameLogic.WIDTH,GameLogic.HEIGHT,BufferedImage.TYPE_INT_RGB);
 
     public static int tileLength;
@@ -38,6 +39,9 @@ public class PlayStateBack {
                 color = new Color(map.getRGB(j, i));
                 if (tiles[j][i].getType() == PlayTile.TYPE.GRASS) {
                     g.drawImage(grass,j * GameLogic.WIDTH / 20,i * GameLogic.HEIGHT / 20,null);
+                }
+                if(tiles[j][i].getType() == PlayTile.TYPE.STAR){
+                    g.drawImage(star,j*GameLogic.WIDTH/20,i*GameLogic.HEIGHT/20,null);
                 }
                 if (tiles[j][i].getType() == PlayTile.TYPE.WALL) {
                     g.drawImage(wall,j * GameLogic.WIDTH / 20,i * GameLogic.HEIGHT / 20,null);
@@ -83,9 +87,11 @@ public class PlayStateBack {
             wall = ImageIO.read(new File("src\\images\\sprites\\wall.png"));
             grass = ImageIO.read(new File("src\\images\\sprites\\grass.png"));
             box = ImageIO.read(new File("src\\images\\sprites\\box.png"));
+            star=ImageIO.read(new File("src\\images\\sprites\\star.png"));
             wall =  wall.getScaledInstance(GameLogic.WIDTH / 20,GameLogic.HEIGHT / 20,Image.SCALE_DEFAULT);
             grass = grass.getScaledInstance(GameLogic.WIDTH / 20,GameLogic.HEIGHT / 20,Image.SCALE_DEFAULT);
             box = box.getScaledInstance(GameLogic.WIDTH / 20,GameLogic.HEIGHT / 20,Image.SCALE_DEFAULT);
+            star = star.getScaledInstance(GameLogic.WIDTH / 20,GameLogic.HEIGHT / 20,Image.SCALE_DEFAULT);
             tileLength = wall.getHeight(null);
         } catch (IOException e) {
             e.printStackTrace();

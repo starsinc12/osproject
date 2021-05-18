@@ -40,6 +40,22 @@ public class PlayState extends GameState {
     public Cursor getCursor() {
         return myCursor;
     }
+    public static void SetTiles(int x,int y){
+        tiles[x][y].setHere(true);
+        if(tiles[x][y].getType()== PlayTile.TYPE.STAR){
+            Hero.setHxp(Hero.getHxp()+100);
+            tiles[x][y].toGrass();
+        }
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
+                if(i!=x || j!=y){
+                    tiles[i][j].setHere(false);
+                }
+            }
+        }
+        System.out.println(tiles[x+1][y].isHere());
+        System.out.println(tiles[x][y].isHere());
+    }
 
     public PlayState(GameStateManager gameStateManager) {
         super(gameStateManager);
@@ -155,8 +171,7 @@ public class PlayState extends GameState {
         }
         if (enemies.size() == 0) {
             isOpen = true;
-            if (Hero.getSkillPoints() > 0)
-                GameLogic.gsm.setUpgrading(true);
+
         } else isOpen = false;
 
         //g.setStroke(new BasicStroke(3));

@@ -89,9 +89,24 @@ public class Hero {
     }
 
     private static int level;
+
+    public static Audio getSoundshoot() {
+        return soundshoot;
+    }
+
+    public static void setSoundshoot(Audio soundshoot) {
+        Hero.soundshoot = soundshoot;
+    }
+
     private static int hxp;
     private static int gameLevel;
     private static int speed;
+
+    public static int getPushkaNumber() {
+        return pushkaNumber;
+    }
+
+    private static  int pushkaNumber;
 
     public static int getSkillPoints() {
         return skillPoints;
@@ -129,7 +144,19 @@ public class Hero {
 
 
     Image imgTank = null;
-    Image imgPushka = null;
+    static Image imgPushka = new ImageIcon("src\\images\\pushka1.png").getImage();
+
+    public Image getImgPushka() {
+        return imgPushka;
+    }
+
+    public static void setImgPushka(int i) {
+        imgPushka=new ImageIcon("src\\images\\pushka"+Integer.toString(i)+".png").getImage();
+        pushkaNumber=i;
+    }
+
+
+
 
     public Hero() {
         x = GameLogic.WIDTH / 2;
@@ -163,8 +190,7 @@ public class Hero {
         ring = null;
 
         imgTank = new ImageIcon("src\\images\\tankbezPushki.png").getImage();
-        imgPushka = new ImageIcon("src\\images\\Pushka.png").getImage();
-
+        setImgPushka(1);
 
     }
 
@@ -215,6 +241,7 @@ public class Hero {
         // ОТВЯЗАТЬ ОТ ФПС
         heroTileX = x / (GameLogic.WIDTH / 20);
         heroTileY = y / (GameLogic.WIDTH / 20);
+        PlayState.SetTiles(heroTileX,heroTileY);
         if (!(up || down || right || left)) {
             //if(attackTimer < 0) attackTimer = 0;
             isAttack = true;
@@ -248,6 +275,8 @@ public class Hero {
             dx = dx / Math.sqrt(2);
         }
         if (((x <= (GameLogic.WIDTH - 255) && x >= 255) && y <= 15) && PlayState.isOpen) {
+            if (Hero.getSkillPoints() > 0)
+                GameLogic.gsm.setUpgrading(true);
             x = GameLogic.WIDTH / 2;
             y = GameLogic.HEIGHT - 20;
             ++PlayState.roomNumber;
@@ -256,7 +285,7 @@ public class Hero {
         x += dx;
         dx = 0;
         dy = 0;
-        System.out.println(protection);
+      //  System.out.println(protection);
         if (hxp >= 100) {
             level++;
             skillPoints++;
@@ -265,7 +294,7 @@ public class Hero {
             soundlvlup.sound();
             soundlvlup.setVolume();
         }
-        System.out.println(damage);
+       //d System.out.println(damage);
     }
 
     public void draw(Graphics2D g) {

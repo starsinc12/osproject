@@ -14,16 +14,16 @@ public class Tower extends Enemy {
 
     @Override
     public void hit(double heroDamage) {
-
+        health -= heroDamage;
     }
 
     public Tower(int level, int tilex, int tiley) {
         this.level = level;
         x = tilex;
         y = tiley;
-        health = 20 + (level - 1) * 4;
-        expForKill = 15 + (level - 1) * 4;
-        damage = 200;
+        health = 60 + (level - 1) * 4;
+        expForKill = 40 + (level - 1) * 4;
+        damage = 400;
         attackTimer = 0;
         attackSpeed = 120;
         attackDelay = 3600 / (attackSpeed + 60);
@@ -49,7 +49,6 @@ public class Tower extends Enemy {
     @Override
     public void update() {
         if (attackTimer == 0) {
-            GameLogic.hero.hit(damage);
             attackTimer = attackDelay;
         }
         --attackTimer;

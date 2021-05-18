@@ -1,6 +1,7 @@
 package backgrounds;
 
 import GameStates.PlayState;
+import GameStates.WorldState;
 import elements.enemies.Bomber;
 import elements.enemies.Fly;
 import logic.GameLogic;
@@ -84,10 +85,10 @@ public class PlayStateBack {
         }
 
         try {
-            wall = ImageIO.read(new File("src\\images\\sprites\\wall.png"));
-            grass = ImageIO.read(new File("src\\images\\sprites\\grass.png"));
-            box = ImageIO.read(new File("src\\images\\sprites\\box.png"));
-            star=ImageIO.read(new File("src\\images\\sprites\\star.png"));
+            wall = ImageIO.read(new File("src\\images\\sprites\\wall"+Integer.toString(WorldState.getLoctionNumber())+".png"));
+            grass = ImageIO.read(new File("src\\images\\sprites\\grass"+Integer.toString(WorldState.getLoctionNumber())+".png"));
+            box = ImageIO.read(new File("src\\images\\sprites\\box"+Integer.toString(WorldState.getLoctionNumber())+".png"));
+            star=ImageIO.read(new File("src\\images\\sprites\\star"+Integer.toString(WorldState.getLoctionNumber())+".png"));
             wall =  wall.getScaledInstance(GameLogic.WIDTH / 20,GameLogic.HEIGHT / 20,Image.SCALE_DEFAULT);
             grass = grass.getScaledInstance(GameLogic.WIDTH / 20,GameLogic.HEIGHT / 20,Image.SCALE_DEFAULT);
             box = box.getScaledInstance(GameLogic.WIDTH / 20,GameLogic.HEIGHT / 20,Image.SCALE_DEFAULT);

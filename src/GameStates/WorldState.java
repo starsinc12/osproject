@@ -14,6 +14,17 @@ public class WorldState extends GameState {
 
     private Image locationImg;
     private int locationNumber;
+
+
+    public static Integer getLoctionNumber() {
+        return loctionNumber;
+    }
+
+    public static void setLoctionNumber(Integer loctionNumber) {
+        WorldState.loctionNumber = loctionNumber;
+    }
+
+    public static Integer loctionNumber=1;
     private String str;
     private Cursor myCursor;
     public Cursor getCursor() {
@@ -36,7 +47,7 @@ public class WorldState extends GameState {
 
     @Override
     public void init() {
-        String str = "src\\images\\maps\\location" + Integer.toString(locationNumber) + "\\preview.png";
+        String str = "src\\images\\maps\\location" + Integer.toString(loctionNumber) + "\\preview.png";
         try {
             backImg = ImageIO.read(new File("src\\images\\backs\\worldback.png"));
             locationImg = ImageIO.read(new File(str));
@@ -56,7 +67,12 @@ public class WorldState extends GameState {
 
     @Override
     public void update() {
-        str = "src\\images\\maps\\location" + Integer.toString(locationNumber) + "\\preview.png";
+        str = "src\\images\\maps\\location" + Integer.toString(loctionNumber) + "\\preview.png";
+        try {
+            locationImg = ImageIO.read(new File(str));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         if(GameLogic.leftMouse) {
             if (GameLogic.mouseX >= 20 && GameLogic.mouseX <= 260 && GameLogic.mouseY >= 700 && GameLogic.mouseY <= GameLogic.HEIGHT) {
                 isINVENTORY = true;
@@ -83,8 +99,28 @@ public class WorldState extends GameState {
             }else{
                 GameLogic.gsm.setSettings(false);
             }
+            if (GameLogic.mouseX >= 600 && GameLogic.mouseX <= 799 && GameLogic.mouseY >= 274 && GameLogic.mouseY <= 360) {
+                if(loctionNumber<2) {
+                    loctionNumber++;
+                }
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (GameLogic.mouseX >= 1 && GameLogic.mouseX <= 220 && GameLogic.mouseY >= 274 && GameLogic.mouseY <= 360) {
+                if(loctionNumber>1) {
+                    loctionNumber--;
+                }
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
-    }
+     }
 
     @Override
     public void draw(Graphics2D g) {
@@ -108,11 +144,20 @@ public class WorldState extends GameState {
 
         g.setColor(Color.BLACK);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 60));
-        g.drawString("Location #1", 250,120);
+        g.drawString("Location #"+Integer.toString(loctionNumber), 250,120);
+
         g.drawImage(locationImg,260,175,280,280,null);
         if (GameLogic.mouseX >= 260 && GameLogic.mouseX <= 540 && GameLogic.mouseY >= 175 && GameLogic.mouseY <= 455) {
             g.setColor(new Color(255, 255, 255, 60));
             g.fillRect(260, 175, 280, 280);
+        }
+        if (GameLogic.mouseX >= 600 && GameLogic.mouseX <= 799 && GameLogic.mouseY >= 274 && GameLogic.mouseY <= 360) {
+            g.setColor(new Color(255, 255, 255, 60));
+            g.fillRect(600, 274, 194, 86);
+        }
+        if (GameLogic.mouseX >= 1 && GameLogic.mouseX <= 220 && GameLogic.mouseY >= 274 && GameLogic.mouseY <= 360) {
+            g.setColor(new Color(255, 255, 255, 60));
+            g.fillRect(1, 274, 194, 86);
         }
 
     }

@@ -88,7 +88,7 @@ public class PlayState extends GameState {
     public void update() {
         if (!currentRoomNumber.equals(roomNumber) || map == null) {
             bullets.clear();
-            mapPath = "src\\images\\maps\\location1\\room" + roomNumber.toString() + ".png";
+            mapPath = "src\\images\\maps\\location"+WorldState.getLoctionNumber().toString()+"\\room" + roomNumber.toString() + ".png";
             try {
                 map = ImageIO.read(new File(mapPath));
             } catch (IOException e) {

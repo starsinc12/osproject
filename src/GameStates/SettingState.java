@@ -75,14 +75,19 @@ public class SettingState extends GameState{
         int volumesettigs=(int)(GameLogic.volume*100);
         String volume=Integer.toString(volumesettigs);
         g.drawString("VOLUME: "+volume+"%",240,350);
-        g.setColor(Color.BLACK);
-        g.fillRect(450,335,100,5);
+        g.setColor(Color.GREEN);
+        g.fillRect(569,325,30,30);
         g.setColor(Color.RED);
-        g.fillRect(480,332,5,10);
-        if(GameLogic.mouseX >= 210 && GameLogic.mouseX <= 590 && GameLogic.mouseY >= 410 && GameLogic.mouseY <= 490){
-
+        g.fillRect(519,325,30,30);
+        if(GameLogic.mouseX >= 569 && GameLogic.mouseX <= 599 && GameLogic.mouseY >= 325 && GameLogic.mouseY <= 355) {
+            g.setColor(Color.YELLOW);
+            g.fillRect(569,325,30,30);
         }
-            if(GameLogic.mouseX >= 210 && GameLogic.mouseX <= 590 && GameLogic.mouseY >= 410 && GameLogic.mouseY <= 490) {
+        if(GameLogic.mouseX >= 519 && GameLogic.mouseX <= 549 && GameLogic.mouseY >= 325 && GameLogic.mouseY <= 355) {
+            g.setColor(Color.YELLOW);
+            g.fillRect(519,325,30,30);
+        }
+        if(GameLogic.mouseX >= 210 && GameLogic.mouseX <= 590 && GameLogic.mouseY >= 410 && GameLogic.mouseY <= 490) {
             g.setColor(new Color(255,255,255,60));
             g.fillRect(210,410,380,80);
         }

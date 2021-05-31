@@ -7,9 +7,7 @@ import elements.enemies.Fly;
 import elements.enemies.Tower;
 import logic.GameLogic;
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
-import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -88,7 +86,6 @@ public class PlayStateBack {
                 }
             }
         }
-
         try {
             wall = ImageIO.read(new File("src\\images\\sprites\\wall"+Integer.toString(WorldState.getLoctionNumber())+".png"));
             grass = ImageIO.read(new File("src\\images\\sprites\\grass"+Integer.toString(WorldState.getLoctionNumber())+".png"));
@@ -103,7 +100,6 @@ public class PlayStateBack {
             e.printStackTrace();
         }
     }
-
     public PlayTile[][] getTiles() {
         return tiles;
     }

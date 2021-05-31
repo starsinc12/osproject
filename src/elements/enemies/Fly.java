@@ -103,7 +103,5 @@ public class Fly extends Enemy {
             g.fillOval(x - r / 2, y - 2 * r, r, r);
             g.fillOval(x - r / 2, y + r, r, r);
         }
-
     }
-
 }

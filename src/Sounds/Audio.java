@@ -11,7 +11,7 @@ public class Audio {
         this.track = track;
         this.wt = wt;
     }
-    public void sound(){
+    public void sound() {
         File f = new File(this.track);
         AudioInputStream tr = null;
         try {

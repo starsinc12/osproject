@@ -120,11 +120,6 @@ public class Hero {
 
     private ArrayList<Skill> skillsList;
 
-    private Weapon weapon;
-    private Armor armor;
-    private Shoes shoes;
-    private Ring ring;
-
     public static boolean up;
     public static boolean down;
     public static boolean left;
@@ -152,8 +147,8 @@ public class Hero {
     }
 
     public static void setImgPushka(int i) {
-        imgPushka=new ImageIcon("src\\images\\pushka"+Integer.toString(i)+".png").getImage();
-        pushkaNumber=i;
+        imgPushka = new ImageIcon("src\\images\\pushka"+Integer.toString(i)+".png").getImage();
+        pushkaNumber = i;
     }
 
 
@@ -184,11 +179,6 @@ public class Hero {
         attackTimer = 15;
         attackSpeed = 90;
         changeAttackDelay(attackSpeed);
-
-        weapon = null;
-        armor = null;
-        shoes = null;
-        ring = null;
 
         imgTank = new ImageIcon("src\\images\\tankbezPushki.png").getImage();
         setImgPushka(1);

@@ -139,5 +139,4 @@ public class Bomber extends Enemy {
         g.setStroke(new BasicStroke(2));
     }
 
-
 }

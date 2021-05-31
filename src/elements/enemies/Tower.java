@@ -29,7 +29,7 @@ public class Tower extends Enemy {
         y = tiley;
         r = 10;
         health = 60 + (level - 1) * 4;
-        expForKill = 40 + (level - 1) * 4;
+        expForKill = 50 + (level - 1) * 4;
         damage = 400;
         attackTimer = 0;
     }

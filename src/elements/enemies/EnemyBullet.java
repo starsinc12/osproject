@@ -47,7 +47,7 @@ public class EnemyBullet {
         angle = a;
         this.x = x;
         this.y = y;
-        r = 5;
+        r = 6;
         speed = 12;
         this.damage = damage;
         color = Color.BLACK;

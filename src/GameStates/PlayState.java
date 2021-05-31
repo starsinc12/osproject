@@ -187,7 +187,7 @@ public class PlayState extends GameState {
         }
         hpBar.draw(g);
 
-        String str = currentRoomNumber.toString() + "/15";
+        String str = currentRoomNumber.toString() + "/7";
         g.setColor(Color.cyan);
         g.setFont(new Font("Calibri", Font.PLAIN, 25));
         g.drawString(str, 5, 25);

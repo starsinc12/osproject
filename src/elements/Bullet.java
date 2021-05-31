@@ -42,9 +42,9 @@ public class Bullet {
 
     public Bullet(boolean isR) {
 
-        double angle = Math.atan((GameLogic.mouseY - Hero.getY()) / ((GameLogic.mouseX == Hero.getX() ) ? 1 : (GameLogic.mouseX - Hero.getX())));
+        double angle = Math.atan((GameLogic.mouseY - Hero.getY()) / ((GameLogic.mouseX == Hero.getX()) ? 1 : (GameLogic.mouseX - Hero.getX())));
 
-        if(GameLogic.mouseX < Hero.getX()){
+        if (GameLogic.mouseX < Hero.getX()) {
             angle += Math.PI;
         }
 
@@ -70,8 +70,8 @@ public class Bullet {
 
     public void update() {
         bulletTileX = x / (GameLogic.WIDTH / 20);
-        bulletTileY =  y / (GameLogic.WIDTH / 20);
-        if(isReflecting && countReflections != 0) {
+        bulletTileY = y / (GameLogic.WIDTH / 20);
+        if (isReflecting && countReflections != 0) {
 
         }
         x += arrowDX;
@@ -79,7 +79,7 @@ public class Bullet {
     }
 
     public boolean remove() {
-        if(isReflecting && countReflections != 0) {
+        if (isReflecting && countReflections != 0) {
             return false;
         } else if (isReflecting && countReflections == 0) {
             return true;
@@ -103,7 +103,7 @@ public class Bullet {
         } else return false;
     }
 
-    private boolean collisionCheckLeft(){
+    private boolean collisionCheckLeft() {
         if (x <= ((GameLogic.WIDTH / 20) * bulletTileX) && !PlayState.background.getTiles()[bulletTileX - 1][bulletTileY].isShootable()) {
             PlayState.background.getTiles()[bulletTileX - 1][bulletTileY].hasShooted();
             return true;
@@ -117,7 +117,7 @@ public class Bullet {
         } else return false;
     }
 
-    private boolean collisionCheckUp(){
+    private boolean collisionCheckUp() {
         if (y <= ((GameLogic.HEIGHT / 20) * bulletTileY) && !PlayState.background.getTiles()[bulletTileX][bulletTileY - 1].isShootable()) {
             PlayState.background.getTiles()[bulletTileX][bulletTileY - 1].hasShooted();
             return true;
@@ -130,6 +130,6 @@ public class Bullet {
     }
 
     public int getR() {
-        return  r;
+        return r;
     }
 }

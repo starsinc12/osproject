@@ -65,7 +65,7 @@ public class SettingState extends GameState{
 
         g.setFont(new Font("TimesRoman", Font.PLAIN, 50));
 
-        g.drawString("GAME OVER",250,260);
+        g.drawString("SETTINGS",250,260);
         g.setColor(Color.BLACK);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 60));
         g.drawString("QUIT",330,475);

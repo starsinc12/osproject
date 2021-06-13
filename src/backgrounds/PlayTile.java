@@ -62,7 +62,7 @@ public class PlayTile {
     public void hasShooted() {
         --hit;
         if(hit <= 0) {
-            if((randomexp=Math.random()*100)<30){
+            if((randomexp = Math.random() * 100) < 10){
                 SoundDrop = new Audio("src//Sounds//drop.wav", GameLogic.volume);
                 SoundDrop.sound();
                 SoundDrop.setVolume();

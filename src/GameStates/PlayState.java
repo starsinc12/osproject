@@ -140,11 +140,11 @@ public class PlayState extends GameState {
 
         hpBar.update();
 
-        if(currentRoomNumber == (maxRoomNum - 5) && !bossHere){
+        if(currentRoomNumber == maxRoomNum && !bossHere){
             enemies.add(new Boss1());
             bossHere = true;
         }
-        if (currentRoomNumber == 7 && !hpBar.isHeroDead) {
+        if (currentRoomNumber == 7 && !hpBar.isHeroDead && !bossHere) {
             GameLogic.gsm.setWin(true);
         }
 

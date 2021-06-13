@@ -6,6 +6,7 @@ import elements.Enemy;
 import backgrounds.PlayStateBack;
 import elements.HPBar;
 import elements.Hero;
+import elements.bosses.Boss1;
 import elements.enemies.EnemyBullet;
 import logic.GameLogic;
 import managers.GameStateManager;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 public class PlayState extends GameState {
 
     public static boolean isOpen = false;
+    public static boolean bossHere = false;
 
     private Cursor myCursor;
 
@@ -34,6 +36,7 @@ public class PlayState extends GameState {
     public static Integer roomNumber;
     private String roomName;
     private Integer currentRoomNumber;
+    private Integer maxRoomNum = 7;
 
     private BufferedImage map;
     private String mapPath;
@@ -137,6 +140,10 @@ public class PlayState extends GameState {
 
         hpBar.update();
 
+        if(currentRoomNumber == (maxRoomNum - 5) && !bossHere){
+            enemies.add(new Boss1());
+            bossHere = true;
+        }
         if (currentRoomNumber == 7 && !hpBar.isHeroDead) {
             GameLogic.gsm.setWin(true);
         }
@@ -187,7 +194,7 @@ public class PlayState extends GameState {
         }
         hpBar.draw(g);
 
-        String str = currentRoomNumber.toString() + "/15";
+        String str = currentRoomNumber.toString() + "/7";
         g.setColor(Color.cyan);
         g.setFont(new Font("Calibri", Font.PLAIN, 25));
         g.drawString(str, 5, 25);

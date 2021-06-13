@@ -23,9 +23,9 @@ public class Bomber extends Enemy {
         y = tiley;
         speed = 3;
         r = 20;
-        health = 20 + (level - 1) * 4;
+        health = 30 + (level - 1) * 4;
         expForKill = 10 + (level - 1) * 4;
-        damage = 400;
+        damage = 600;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class Bomber extends Enemy {
 
     @Override
     public int getR() {
-        return 0;
+        return r;
     }
 
     @Override
@@ -113,7 +113,7 @@ public class Bomber extends Enemy {
         y += dy;
 
         // ВЗАИМОДЕЙСТВИЕ С ГЕРОЕМ
-        if (x == Hero.getX() && y == Hero.getY()) {
+        if ((x >= Hero.getX() - 23 && x <= Hero.getX() + 23) && (y >= Hero.getY() - 36 && y <= Hero.getY() + 31)) {
             boom = new Audio("src//Sounds//boom.wav", GameLogic.volume);
             boom.sound();
             boom.setVolume();

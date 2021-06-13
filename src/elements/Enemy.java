@@ -16,6 +16,7 @@ public abstract class Enemy {
     protected int level;
     protected int damage;
     protected int expForKill;
+
     public int getExpForKill() {
         return expForKill;
     }
@@ -25,16 +26,22 @@ public abstract class Enemy {
     protected double dist;
 
     public abstract void update();
+
     public abstract void draw(Graphics2D g);
+
     public abstract void hit(double heroDamage);
+
     public abstract boolean isDead();
 
     public int getX() {
         return x;
     }
+
     public int getY() {
         return y;
     }
+
     public abstract int getR();
+
     public abstract void xpifDed();
 }

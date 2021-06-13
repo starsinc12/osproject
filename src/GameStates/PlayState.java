@@ -180,8 +180,6 @@ public class PlayState extends GameState {
     public void draw(Graphics2D g) {
 
         background.draw(g);
-
-
         GameLogic.hero.draw(g);
         for (Bullet bullet : bullets) {
             bullet.draw(g);

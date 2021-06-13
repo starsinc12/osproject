@@ -7,15 +7,20 @@ import elements.Hero;
 import logic.GameLogic;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Bomber extends Enemy {
 
     private int r;
-    private boolean up;
-    private boolean down;
-    private boolean left;
-    private boolean right;
+    private FieldForMoving ffm = null;
+    private ArrayList<int[]> path;
     public static Audio boom;
+    private int htx = 0;
+    private int hty = 0;
+    private int letx = 0;
+    private int lety = 0;
+
+
 
     public Bomber(int level, int tilex, int tiley) {
         this.level = level;
@@ -23,9 +28,9 @@ public class Bomber extends Enemy {
         y = tiley;
         speed = 3;
         r = 20;
-        health = 30 + (level - 1) * 4;
+        health = 20 + (level - 1) * 4;
         expForKill = 10 + (level - 1) * 4;
-        damage = 600;
+        damage = 400;
     }
 
     @Override
@@ -73,14 +78,94 @@ public class Bomber extends Enemy {
         } else return false;
     }
 
-
     @Override
     public void update() {
 
         enemyTileX = x / (GameLogic.WIDTH / 20);
         enemyTileY = y / (GameLogic.WIDTH / 20);
-
         // ПЕРЕМЕЩЕНИЕ
+        if (Hero.getHeroTileX() != htx || Hero.getHeroTileY() != hty || enemyTileX != letx || enemyTileY != lety) {
+            letx = enemyTileX;
+            lety = enemyTileY;
+            htx = Hero.getHeroTileX();
+            hty = Hero.getHeroTileY();
+            ffm = new FieldForMoving();
+            path = ffm.findPath(enemyTileX, enemyTileY, Hero.getHeroTileX(), Hero.getHeroTileY());
+        }
+
+        if (path.size() == 1) {
+            distX = Hero.getX() - x;
+            distY = Hero.getY() - y;
+
+            if (distX == 0 && distY == 0) {
+                dist = 1;
+            } else {
+                dist = Math.sqrt(distX * distX + distY * distY);
+            }
+
+            dx = distX / dist * speed;
+            dy = distY / dist * speed;
+
+            if (x == Hero.getX() || y == Hero.getY()) {
+                dy = dy / Math.sqrt(2);
+                dx = dx / Math.sqrt(2);
+            }
+
+            x += dx;
+            y += dy;
+        }
+        else if(path.size() > 1) {
+            dx = 0;
+            dy = 0;
+
+            //r
+            if(path.get(0)[0] < path.get(1)[0] && path.get(0)[1] == path.get(1)[1]) {
+                dx = speed;
+                dy = 0;
+            }
+            //rd
+            else if(path.get(0)[0] < path.get(1)[0] && path.get(0)[1] < path.get(1)[1]) {
+                dx = speed / Math.sqrt(2);
+                dy = speed / Math.sqrt(2);
+            }
+            //d
+            else if(path.get(0)[0] == path.get(1)[0] && path.get(0)[1] < path.get(1)[1]) {
+                dx = 0;
+                dy = speed;
+            }
+            //ld
+            else if(path.get(0)[0] > path.get(1)[0] && path.get(0)[1] < path.get(1)[1]) {
+                dx = -speed / Math.sqrt(2);
+                dy = speed / Math.sqrt(2);
+            }
+            //l
+            else if(path.get(0)[0] > path.get(1)[0] && path.get(0)[1] == path.get(1)[1]) {
+                dx = -speed;
+                dy = 0;
+            }
+            //lu
+            else if(path.get(0)[0] > path.get(1)[0] && path.get(0)[1] > path.get(1)[1]) {
+                dx = -speed / Math.sqrt(2);
+                dy = -speed / Math.sqrt(2);
+            }
+            //u
+            else if(path.get(0)[0] == path.get(1)[0] && path.get(0)[1] > path.get(1)[1]) {
+                dx = 0;
+                dy = -speed;
+            }
+            //ru
+            else if(path.get(0)[0] < path.get(1)[0] && path.get(0)[1] > path.get(1)[1]) {
+                dx = speed / Math.sqrt(2);
+                dy = -speed / Math.sqrt(2);
+            }
+
+
+        }
+
+        x += dx;
+        y += dy;
+
+        /*
         distX = Hero.getX() - x;
         distY = Hero.getY() - y;
         if (distX == 0 && distY == 0) {
@@ -111,6 +196,7 @@ public class Bomber extends Enemy {
 
         x += dx;
         y += dy;
+        */
 
         // ВЗАИМОДЕЙСТВИЕ С ГЕРОЕМ
         if ((x >= Hero.getX() - 23 && x <= Hero.getX() + 23) && (y >= Hero.getY() - 36 && y <= Hero.getY() + 31)) {
@@ -138,5 +224,6 @@ public class Bomber extends Enemy {
         g.drawOval(x - r / 4, y - r / 4, r / 2, r / 2);
         g.setStroke(new BasicStroke(2));
     }
+
 
 }

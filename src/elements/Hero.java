@@ -39,6 +39,14 @@ public class Hero {
     private static int heroTileX;
     private static int heroTileY;
 
+    public static int getHeroTileX() {
+        return heroTileX;
+    }
+
+    public static int getHeroTileY() {
+        return heroTileY;
+    }
+
     private int r;
     private double dx;
     private double dy;
@@ -140,6 +148,7 @@ public class Hero {
 
     Image imgTank = null;
     static Image imgPushka = new ImageIcon("src\\images\\pushka1.png").getImage();
+
 
 
     public Image getImgPushka() {

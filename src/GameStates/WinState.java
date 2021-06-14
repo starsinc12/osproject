@@ -5,6 +5,12 @@ import managers.GameStateManager;
 
 import java.awt.*;
 
+
+/*
+ * Класс описывающий состояние выигрыша.
+ * Взаимодействие с пользователем(нажатие кнопок) в методе update(),
+ * Отрисовка в методе Draw()
+ * */
 public class WinState extends GameState{
 
     public static boolean isQuit = false;

@@ -2,6 +2,11 @@ package Sounds;
 import java.io.File;
 import java.io.IOException;
 import javax.sound.sampled.*;
+
+/*
+* Класс обеспечивающий работу музыки и звуков в игре
+*  */
+
 public class Audio {
     private String track;
     private Clip clip = null;

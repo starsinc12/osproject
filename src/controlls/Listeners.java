@@ -6,6 +6,10 @@ import managers.GameStateManager;
 
 import java.awt.event.*;
 
+/*
+* Класс, методы которого обрабатывают события нажатых клавиш клавиатуры и мыши
+*/
+
 public class Listeners implements KeyListener, MouseListener, MouseMotionListener {
 
     public static void update() {

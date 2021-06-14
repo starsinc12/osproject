@@ -2,6 +2,11 @@ package elements;
 
 import java.awt.*;
 
+
+/*
+* Абстрактный класс с методами и полями, которыми обладают все Враги
+*/
+
 public abstract class Enemy {
 
     protected int x;

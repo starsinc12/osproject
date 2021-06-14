@@ -9,6 +9,12 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
+/*
+ * Класс описывающий состояние улучшения героя.
+ * Взаимодействие с пользователем(нажатие кнопок) в методе update(),
+ * Отрисовка в методе Draw()
+ * */
+
 public class UpgradeState extends GameState {
     public UpgradeState(GameStateManager gsm) {
         super(gsm);

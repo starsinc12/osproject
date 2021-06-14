@@ -8,6 +8,12 @@ import elements.Hero;
 
 import java.awt.*;
 
+/*
+ * Класс врага, которы стоит на месте и стреляет вокруг себя
+ *
+ * перемещения, стрельбы и взаимодействие с героем описаны в методе update
+ */
+
 public class Tower extends Enemy {
 
     private int attackTimer;

@@ -10,6 +10,12 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/*
+ * Класс описывающий состояние меню-инвентарь.
+ * Взаимодействие с пользователем(нажатие кнопок) в методе update(),
+ * Отрисовка в методе Draw()
+ * */
+
 public class InventoryState extends GameState {
 
     public InventoryState(GameStateManager gameStateManager) {

@@ -1,10 +1,7 @@
 package elements;
 
 import GameStates.PlayState;
-import inventory.typesOfEquipment.Armor;
-import inventory.typesOfEquipment.Ring;
-import inventory.typesOfEquipment.Shoes;
-import inventory.typesOfEquipment.Weapon;
+
 import logic.GameLogic;
 import managers.GameStateManager;
 import skills.Skill;
@@ -13,6 +10,11 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import Sounds.Audio;
+
+/*
+* Класс Описывающий главного героя.
+* Вся отрисовка в методе Draw(), все перемещения и стрельба в Update()
+*/
 
 public class Hero {
     public static Audio soundshoot;

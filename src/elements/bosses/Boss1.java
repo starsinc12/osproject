@@ -8,6 +8,10 @@ import logic.GameLogic;
 
 import java.awt.*;
 
+/*
+* Класс босса первой локации
+*/
+
 public class Boss1 extends Enemy {
 
     private int r;
@@ -23,7 +27,7 @@ public class Boss1 extends Enemy {
         y = 100;
         speed = 5;
         r = 15;
-        health = 10;
+        health = 100;
         maxHealth = health;
         expForKill = 0;
         damage = 400;

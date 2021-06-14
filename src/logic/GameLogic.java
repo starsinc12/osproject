@@ -10,7 +10,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class GameLogic extends JPanel implements Runnable{
+
+/*
+* КЛасс описывающий логику игры, в методе run() основной цикл программы и таймер для контроля частоты отрисовки кадров.
+* */
+public class GameLogic extends JPanel implements Runnable {
 
 
     public static int WIDTH;
@@ -68,7 +72,7 @@ public class GameLogic extends JPanel implements Runnable{
         long wait;
         fon = new Audio("src//Sounds//marsh.wav",volume);
         fon.sound();
-        fon.setVolume();
+        fon.setVolume(volume);
         fon.repeat();
         while(isRunning) {
             start = System.nanoTime();

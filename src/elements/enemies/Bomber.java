@@ -9,6 +9,12 @@ import logic.GameLogic;
 import java.awt.*;
 import java.util.ArrayList;
 
+
+/*
+* Класс врага, которы бежит на героя, чтобы взорвать его
+* поле FieldForMoving формирует маршрут к герою
+* перемещения и взаимодействия с героем описаны в методе update
+*/
 public class Bomber extends Enemy {
 
     private int r;
@@ -210,10 +216,10 @@ public class Bomber extends Enemy {
         g.setColor(Color.BLACK);
         g.drawOval(x - r / 4, y - r / 4, r / 2, r / 2);
         g.setStroke(new BasicStroke(2));
-        for (int i = 0; i < path.size(); i++) {
+        /*for (int i = 0; i < path.size(); i++) {
             g.setColor(Color.BLACK);
             g.fillOval(path.get(i)[0] * 40 + 20, path.get(i)[1] * 40 + 20,7,7);
-        }
+        }*/
     }
 
 

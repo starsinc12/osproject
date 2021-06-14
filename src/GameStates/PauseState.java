@@ -6,6 +6,12 @@ import managers.GameStateManager;
 
 import java.awt.*;
 
+/*
+ * Класс описывающий состояние паузы.
+ * Взаимодействие с пользователем(нажатие кнопок) в методе update(),
+ * Отрисовка в методе Draw()
+ * */
+
 public class PauseState extends GameState {
 
     public PauseState(GameStateManager gameStateManager) {

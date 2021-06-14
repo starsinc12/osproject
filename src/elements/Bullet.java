@@ -6,6 +6,10 @@ import managers.GameStateManager;
 
 import java.awt.*;
 
+/*
+* Класс пули главного героя.
+* В методах collisionCheck(Right, Left, Up, Down) описаны столкновения с стенами комнаты
+*/
 
 public class Bullet {
 

@@ -12,6 +12,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+
+
+/*
+*  Класс отвечающий за формирование фона карты каждой комнаты
+*  клетки поля хранятся в массиве 20 на 20
+*  при составлении карты учитывается цвет пикселей
+*/
 public class PlayStateBack {
 
     private Image img = null;

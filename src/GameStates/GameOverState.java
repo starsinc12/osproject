@@ -5,6 +5,12 @@ import managers.GameStateManager;
 
 import java.awt.*;
 
+
+/*
+* Класс описывающий состояние проигрыша.
+* Взаимодействие с пользователем(нажатие кнопок) в методе update(),
+* Отрисовка в методе Draw()
+* */
 public class GameOverState extends GameState {
 
     public GameOverState(GameStateManager gsm) {

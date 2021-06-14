@@ -18,6 +18,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/*
+ * Класс описывающий состояние игры(боя).
+ * Взаимодействие с пользователем(нажатие кнопок) в методе update(),
+ * Отрисовка в методе Draw()
+ * */
+
 public class PlayState extends GameState {
 
     public static boolean isOpen = false;
@@ -148,6 +154,7 @@ public class PlayState extends GameState {
 
     }
 
+    // столкновение пуля герой
     private boolean collisionBulletHero(int a) {
         boolean t = false;
         for (int i = 0; i < ebullets.size(); i++) {

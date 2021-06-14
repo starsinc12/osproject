@@ -10,6 +10,12 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/*
+ * Класс описывающий состояние меню-мир.
+ * Взаимодействие с пользователем(нажатие кнопок) в методе update(),
+ * Отрисовка в методе Draw()
+*/
+
 public class WorldState extends GameState {
 
     private Image locationImg;

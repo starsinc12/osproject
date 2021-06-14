@@ -6,6 +6,12 @@ import managers.GameStateManager;
 import javax.swing.*;
 import java.awt.*;
 
+
+/*
+ * Класс описывающий состояние настроек.
+ * Взаимодействие с пользователем(нажатие кнопок) в методе update(),
+ * Отрисовка в методе Draw()
+ * */
 public class SettingState extends GameState{
     public static boolean isQuit = false;
     public static boolean valueup = false;

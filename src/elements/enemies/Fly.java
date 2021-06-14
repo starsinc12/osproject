@@ -6,6 +6,12 @@ import logic.GameLogic;
 
 import java.awt.*;
 
+/*
+ * Класс врага, который бежит на героя, игнорируя препятствия
+ *
+ * перемещения и взаимодействия с героем описаны в методе update
+ */
+
 public class Fly extends Enemy {
     private int attackTimer;
     private int attackSpeed;

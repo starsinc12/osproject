@@ -5,6 +5,11 @@ import managers.GameStateManager;
 import javax.swing.*;
 import java.awt.*;
 
+/*
+ * Абстрактный Класс с методами и полями описывающими каждое состояние игры.
+*/
+
+
 public abstract class GameState  extends JPanel {
 
     protected GameStateManager gsm;

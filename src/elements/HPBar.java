@@ -4,6 +4,9 @@ import logic.GameLogic;
 
 import java.awt.*;
 
+/*
+* Класс формирующий и отрисовывающий полоску здоровья главного героя
+*/
 public class HPBar {
 
     private int hpToPix;

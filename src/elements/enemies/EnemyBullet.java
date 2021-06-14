@@ -7,6 +7,9 @@ import managers.GameStateManager;
 
 import java.awt.*;
 
+/*
+* Класс описывающий вражеские пули, в конструктор передаются координаты, откуда был сделан выстрел, угол и урон.
+*  */
 
 public class EnemyBullet {
 

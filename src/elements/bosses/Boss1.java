@@ -62,7 +62,7 @@ public class Boss1 extends Enemy {
             PlayState.ebullets.add(new EnemyBullet((angle), x, y, damage));
             PlayState.ebullets.add(new EnemyBullet((angle + Math.PI / 12), x, y, damage));
             PlayState.ebullets.add(new EnemyBullet((angle - Math.PI / 12), x, y, damage));
-            attackTimer = 30;
+            attackTimer = 50;
         }
         --attackTimer;
     }

@@ -104,10 +104,18 @@ public class FieldForMoving {
 
     /** 2 клетки. В 1-ой находится враг, во 2-ой - герой */
     public ArrayList<int[]> findPath(int x1, int y1, int x2, int y2) {
+        ArrayList<int[]> path = new ArrayList<>();
+        ArrayList<int[]> truepath = new ArrayList<>();
         ArrayList<TileForMoving> queue = new ArrayList<>();
         TileForMoving cur = tfm[x1][y1];
         cur.ResultWeith = Integer.MAX_VALUE;
         queue.add(cur);
+        if(x1 == x2 || y1 == y2) {
+            int ii = 0;
+            /*int[] tp = {cur.x, cur.y};
+            truepath.add(tp);
+            return truepath;*/
+        }
         boolean find = false;
         while (!find) {
             for (int i = -1; i < 2; ++i) {
@@ -144,15 +152,16 @@ public class FieldForMoving {
             }
         }
 
-        ArrayList<int[]> path = new ArrayList<>();
-        ArrayList<int[]> truepath = new ArrayList<>();
-        while(cur.x != x1 && cur.y != y1) {
+
+        while(true) {
             int[] a = new int[2];
             a[0] = cur.x;
             a[1] = cur.y;
             path.add(a);
             cur = cur.takedFrom;
+            if(cur.x == x1 && cur.y == y1) break;
         }
+
         int[] start = {x1, y1};
         path.add(start);
         for (int i = 0; i < path.size(); ++i) {

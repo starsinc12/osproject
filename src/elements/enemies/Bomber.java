@@ -19,14 +19,14 @@ public class Bomber extends Enemy {
     private int hty = 0;
     private int letx = 0;
     private int lety = 0;
-
+    private int pathInd = 0;
 
 
     public Bomber(int level, int tilex, int tiley) {
         this.level = level;
         x = tilex;
         y = tiley;
-        speed = 3;
+        speed = 5;
         r = 20;
         health = 20 + (level - 1) * 4;
         expForKill = 10 + (level - 1) * 4;
@@ -84,40 +84,39 @@ public class Bomber extends Enemy {
         enemyTileX = x / (GameLogic.WIDTH / 20);
         enemyTileY = y / (GameLogic.WIDTH / 20);
         // ПЕРЕМЕЩЕНИЕ
-        if (Hero.getHeroTileX() != htx || Hero.getHeroTileY() != hty || enemyTileX != letx || enemyTileY != lety) {
+        if (Hero.getHeroTileX() != htx || Hero.getHeroTileY() != hty) {
             letx = enemyTileX;
             lety = enemyTileY;
             htx = Hero.getHeroTileX();
             hty = Hero.getHeroTileY();
             ffm = new FieldForMoving();
             path = ffm.findPath(enemyTileX, enemyTileY, Hero.getHeroTileX(), Hero.getHeroTileY());
+            pathInd = 1;
         }
 
-        if (path.size() == 1) {
+
+        if(x != path.get(pathInd)[0] * 40 + 20 || y != path.get(pathInd)[1] * 40 + 20) {
+            x += Math.signum(path.get(pathInd)[0] * 40 + 20 - x) * speed / 2;
+            y += Math.signum(path.get(pathInd)[1] * 40 + 20 - y) * speed / 2;
+        } else ++pathInd;
+
+        /*if (path.size() == 1) {
             distX = Hero.getX() - x;
             distY = Hero.getY() - y;
-
             if (distX == 0 && distY == 0) {
                 dist = 1;
             } else {
                 dist = Math.sqrt(distX * distX + distY * distY);
             }
-
             dx = distX / dist * speed;
             dy = distY / dist * speed;
-
             if (x == Hero.getX() || y == Hero.getY()) {
-                dy = dy / Math.sqrt(2);
-                dx = dx / Math.sqrt(2);
+                dy = speed / Math.sqrt(2);
+                dx = speed / Math.sqrt(2);
             }
-
-            x += dx;
-            y += dy;
-        }
-        else if(path.size() > 1) {
+        } else if(path.size() > 1) {
             dx = 0;
             dy = 0;
-
             //r
             if(path.get(0)[0] < path.get(1)[0] && path.get(0)[1] == path.get(1)[1]) {
                 dx = speed;
@@ -127,6 +126,13 @@ public class Bomber extends Enemy {
             else if(path.get(0)[0] < path.get(1)[0] && path.get(0)[1] < path.get(1)[1]) {
                 dx = speed / Math.sqrt(2);
                 dy = speed / Math.sqrt(2);
+                if(collisionCheckDown()) {
+                    dy = 0;
+                }
+                if(collisionCheckRight()) {
+                    dx = 0;
+                }
+
             }
             //d
             else if(path.get(0)[0] == path.get(1)[0] && path.get(0)[1] < path.get(1)[1]) {
@@ -137,6 +143,12 @@ public class Bomber extends Enemy {
             else if(path.get(0)[0] > path.get(1)[0] && path.get(0)[1] < path.get(1)[1]) {
                 dx = -speed / Math.sqrt(2);
                 dy = speed / Math.sqrt(2);
+                if(collisionCheckDown()) {
+                    dy = 0;
+                }
+                if(collisionCheckLeft()) {
+                    dx = 0;
+                }
             }
             //l
             else if(path.get(0)[0] > path.get(1)[0] && path.get(0)[1] == path.get(1)[1]) {
@@ -147,6 +159,12 @@ public class Bomber extends Enemy {
             else if(path.get(0)[0] > path.get(1)[0] && path.get(0)[1] > path.get(1)[1]) {
                 dx = -speed / Math.sqrt(2);
                 dy = -speed / Math.sqrt(2);
+                if(collisionCheckUp()) {
+                    dy = 0;
+                }
+                if(collisionCheckLeft()) {
+                    dx = 0;
+                }
             }
             //u
             else if(path.get(0)[0] == path.get(1)[0] && path.get(0)[1] > path.get(1)[1]) {
@@ -157,46 +175,15 @@ public class Bomber extends Enemy {
             else if(path.get(0)[0] < path.get(1)[0] && path.get(0)[1] > path.get(1)[1]) {
                 dx = speed / Math.sqrt(2);
                 dy = -speed / Math.sqrt(2);
+                if(collisionCheckUp()) {
+                    dy = 0;
+                }
+                if(collisionCheckRight()) {
+                    dx = 0;
+                }
             }
 
-
-        }
-
-        x += dx;
-        y += dy;
-
-        /*
-        distX = Hero.getX() - x;
-        distY = Hero.getY() - y;
-        if (distX == 0 && distY == 0) {
-            dist = 1;
-        } else {
-            dist = Math.sqrt(distX * distX + distY * distY);
-        }
-
-
-        dx = distX / dist * speed;
-        dy = distY / dist * speed;
-
-        if (x == Hero.getX() || y == Hero.getY()) {
-            dy = dy / Math.sqrt(2);
-            dx = dx / Math.sqrt(2);
-        }
-
-        if (collisionCheckRight() || collisionCheckLeft()) {
-            dx = 0;
-            if (distY > 0) dy = speed;
-            else dy = -speed;
-
-        } else if (collisionCheckDown() || collisionCheckUp()) {
-            dy = 0;
-            if (distX > 0) dx = speed;
-            else dx = -speed;
-        }
-
-        x += dx;
-        y += dy;
-        */
+        }*/
 
         // ВЗАИМОДЕЙСТВИЕ С ГЕРОЕМ
         if ((x >= Hero.getX() - 23 && x <= Hero.getX() + 23) && (y >= Hero.getY() - 36 && y <= Hero.getY() + 31)) {
@@ -223,6 +210,10 @@ public class Bomber extends Enemy {
         g.setColor(Color.BLACK);
         g.drawOval(x - r / 4, y - r / 4, r / 2, r / 2);
         g.setStroke(new BasicStroke(2));
+        for (int i = 0; i < path.size(); i++) {
+            g.setColor(Color.BLACK);
+            g.fillOval(path.get(i)[0] * 40 + 20, path.get(i)[1] * 40 + 20,7,7);
+        }
     }
 
 

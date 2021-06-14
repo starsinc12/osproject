@@ -90,7 +90,7 @@ public class Hero {
         Hero.dmgincres = dmgincres;
     }
 
-    private static int dmgincres = 1;
+    private static int dmgincres = 2;
 
     public static double getDamage() {
         return damage;
@@ -164,7 +164,7 @@ public class Hero {
 
 
     public Hero() {
-        x = GameLogic.WIDTH / 2;
+        x = 8 * 40 + 20;
         y = GameLogic.HEIGHT - 20;
         r = 8;
         speed = 7;

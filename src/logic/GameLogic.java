@@ -16,7 +16,7 @@ public class GameLogic extends JPanel implements Runnable{
     public static int WIDTH;
     public static int HEIGHT;
     public static Audio fon;
-    public static double volume=0.7;
+    public static double volume = 0.4;
 
     public static int mouseX;
     public static int mouseY;

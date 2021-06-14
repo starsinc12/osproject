@@ -23,9 +23,9 @@ public class Boss1 extends Enemy {
         y = 100;
         speed = 5;
         r = 15;
-        health = 100;
+        health = 10;
         maxHealth = health;
-        expForKill = 115 + (level - 1) * 4;
+        expForKill = 0;
         damage = 400;
         attackTimer = 0;
         attackSpeed = 120;

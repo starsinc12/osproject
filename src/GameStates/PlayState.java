@@ -126,6 +126,13 @@ public class PlayState extends GameState {
             }
         }
 
+
+        if(currentRoomNumber == maxRoomNum && !bossHere){
+            enemies.add(new Boss1());
+            bossHere = true;
+        }
+
+
         for (int i = 0; i < enemies.size(); i++) {
             enemies.get(i).update();
 
@@ -137,16 +144,7 @@ public class PlayState extends GameState {
                 enemiesKilled++;
             }
         }
-
         hpBar.update();
-
-        if(currentRoomNumber == maxRoomNum && !bossHere){
-            enemies.add(new Boss1());
-            bossHere = true;
-        }
-        if (currentRoomNumber == 7 && !hpBar.isHeroDead && !bossHere) {
-            GameLogic.gsm.setWin(true);
-        }
 
     }
 
@@ -204,5 +202,10 @@ public class PlayState extends GameState {
             isOpen = true;
 
         } else isOpen = false;
+
+        if (currentRoomNumber == 7 && !hpBar.isHeroDead && !bossHere) {
+            GameLogic.gsm.setWin(true);
+        }
+
     }
 }
